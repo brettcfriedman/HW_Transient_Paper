@@ -125,11 +125,12 @@
 
 Turbulence in magnetically confined plasmas is almost always attributed to linear instabilities. The calculation of linear instabilities through normal mode analysis
 -- the calculation of eigenvalues and eigenvectors of a linearized dynamical system -- has successfully predicted the onset criterion for many MHD and micro-instabilities.
-Nevertheless, it is well-known in the hydrodynamics community that normal mode analysis fails at predicting turbulent onset for a large class of instabilities that are called subcritical.
-Subcritical turbulence is certainly possible in plasmas, and several specific cases have been studied in the past~\cite{camargo1998,camporeale2010,schekochihin2012}. 
-For the most part, however, normal mode analysis dominates plasma turbulence prediction.
+Nevertheless, it is well-known in the hydrodynamics community that normal mode analysis fails at predicting turbulent onset for a large class of experiments that are deemed to have
+subcritical turbulence. Subcritical turbulence is certainly possible in plasmas, and several instances have been studied in the 
+past~\cite{waltz1985,scott1990,scott1992,nordman1993,biskamp1995,drake1995,camargo1998,krommes1999,scott2002,camporeale2009,camporeale2010,schekochihin2012,highcock2012}. 
+For the most part, however, normal mode analysis dominates plasma turbulence prediction despite the fact that it is not useful in all instances.
 
-Since the hydrodynamics community has long studied subcritical turbulence, it has much to offer in terms of understanding the phenomenon. Most importantly,
+Since the hydrodynamics community has long studied subcritical turbulence, it has much to offer in terms of understanding the phenomenon. Most significantly,
 in the early 1990's, Trefethen and others attributed the failure of normal mode analysis in predicting subcritical turbulent onset to the non-normality of linear operators of
 dynamical systems~\cite{trefethen1993,schmid2007}. A non-normal operator has 
 eigenvectors that are not orthogonal to one another. One consequence of eigenvector nonorthogonality is that even when all eigenvectors decay exponentially under linear evolution, 
@@ -139,20 +140,16 @@ When combined with nonlinear effects, this allows for sustained subcritical turb
 Such behavior is obscured by traditional normal mode analysis, which only effectively describes the long time asymptotic behavior of fluctuations under  
 action of the linear operator. Transient growth, which can dominate turbulent evolution, can be discovered only through non-modal calculations.
 
-
 Non-modal analysis generally employs tools such as pseudospectra and maximum possible transient growth curves, which have been used to successfully explain why turbulence is subcritical in various
-systems. However, to our knowledge, they have not been used to predict onset criteria in subcritical systems (e.g. the transition Reynold's number in pipe flows).
-
-Furthermore, non-modal treatments have generally been explanatory rather than predictive and have centered around the transition to turbulence in subcritical systems rather 
-than on properties of fully-developed turbulence.
-This paper takes up the task of developing an approach to understand turbulent properties using only non-modal linear calculations with the goal of 
+systems. However, to our knowledge, they have not been used to predict onset criteria in subcritical systems (e.g. the transition Reynold's number in pipe flows), although non-normal
+turbulent arguments have been applied in generating amplitude versus Reynold's number scalings for turbulent onset.
+This paper takes up the task of developing a new approach to understand turbulent properties using only non-modal linear calculations with the goal of 
 ultimately making quantitative predictions.  Our approach is to calculate an average growth rate of turbulent fluctuations due to linear processes, specifically due to transient growth.  We model the
 turbulent steady state as a series of processes:  (1) the turbulence starts as a spatially random state, (2) linear transient growth deterministically amplifies the turbulent energy (or
 decrease it in wavenumber ranges where linear damping dominates), (3) nonlinear transfer sets in at a specified timescale, terminating the
 transient growth process and re-randomizing the turbulent state (at which point the cycle repeats).    Optimally, the timescale for the final step would be the
 nonlinear decorrelation time of the turbulent system, but in order to enable predictive capability, we employ critical balance
-arguments to use a characteristic \emph{linear} time. Since there is no obvious single linear time scale, we test several and compare the results to determine which works best.
-The procedure ultimately produces a growth rate that can be used
+arguments to use a characteristic \emph{linear} time. The procedure ultimately produces a growth rate that can be used
 to predict turbulent properties such as saturation levels and transport rates through mixing length arguments.
 
 \section{Non-Normality of the Hasegawa-Wakatani Model}
@@ -172,12 +169,14 @@ $\mathbf{v_E} = \mathbf{b} \times \grad \phi$, $\xi = 4 \pi \omega_{ce}/\nu_{ei}
 and $\kappa = \rho_s/L_n$, where $L_n$ is the density scale length. The terms $D \gradperp^4 n$ and $D \gradperp^6 \phi$ are artificial hyper-diffusion and hyper-viscosity used to dissipate
 energy on small scales. We set $D \to 10^{-5}$ except when otherwise indicated.
 We associate the direction along $\mathbf{B}$ as the parallel or $z$ direction. The direction perpendicular $\mathbf{B}$ that
-points opposite the density gradient is defined as the $x$ direction, and the $y$ direction is taken perpendicular to both of these. 
+points opposite the density gradient is defined as the $x$ direction, and the $y$ direction is taken perpendicular to both of these.
+
 In the analysis and numerical simulations, which we perform with the BOUT++ code~\cite{dudson2009}, we use periodic boundary conditions in
-the $y$ and $z$ directions with zero-value boundaries in the $x$ direction. For the 2D version of the model, we replace $-\xi \gradpar^2$ by 
-$\alpha = k_z^2 \xi = 4 \pi k_z^2 \rho_s^2 \omega_{ce} /\nu_{ei}$, which is commonly known as the adiabaticity parameter~\cite{camargo1995,camargo1998}.
-In nonlinear simulations, the turbulence can laminarize due to the build-up of $k_y=0$ density and potential structures~\cite{biskamp1995}. To prevent this, we subtract out the $k_y=0$
-$n$ and $\phi$ components in the simulations, which is the equivalent of adding source terms to Eqs.~\ref{n_eq} and~\ref{phi_eq}~\cite{friedman2012b}.
+the $y$ and $z$ directions with zero-value boundaries in the $x$ direction. We use a domain size of $64 \rho_s \times 64 rho_s \times 300 \rho_s$.
+For the 2D version of the model, we replace $-\xi \gradpar^2$ by $\alpha = k_z^2 \xi = 4 \pi k_z^2 \rho_s^2 \omega_{ce} /\nu_{ei}$, 
+which is commonly known as the adiabaticity parameter~\cite{camargo1995,camargo1998}. Additionally we use a domain size of $50 \rho_s \times 50 \rho_s$.
+In numerical simulations, the turbulence can laminarize due to the build-up of $k_y=0$ density and potential structures~\cite{biskamp1995}. To prevent this, we subtract out the $k_y=0$
+$n$ and $\phi$ components, which is the equivalent of adding source terms to Eqs.~\ref{n_eq} and~\ref{phi_eq}~\cite{friedman2012b}.
 
 The degree of non-normality of the linear operator in the HW model is largely a function of the adiabaticity parameter~\cite{camargo1998}, or in the 3D case, of $\xi \gradpar^2$. 
 Note that a matrix is normal if it commutes with its adjoint: $\mathbf{D} \mathbf{D}^\dagger = \mathbf{D}^\dagger \mathbf{D}$ for $\mathbf{D}$ normal. 
@@ -522,8 +521,64 @@ Most importantly, it correctly predicts that $\gamma_{\omega,k_z=0} > 0$ and $\g
 is dominated by the nonlinear instability rather than a linear drift wave instability. Simply put, transient growth is strongest at $k_z=0$, so the nonlinear instability is energetically
 favored over the linear instability. Again, $\gamma_{\gamma,k}$ does not provide enough accuracy to warrant its use.
 
+\section{Prediction of Control Parameter for Subcritical Turbulent Onset}
 
+In both hydrodynamic and plasma systems, it is important to be able to predict the smallest value of a control parameter for which the system will become turbulent. 
+The control parameter is different for different systems (and models of those systems), and there may be several control parameters for a particular problem. When $d$ control parameters exist in a model, 
+there is not a single point in the parameter space at which the system bifurcates to turbulence, rather, there is a $d-1$ manifold that separates the laminar and turbulent states.
+In many hydrodynamic systems driven turbulent by shear flow, there is generally a single control parameter -- the Reynold's number $Re$~\cite{drazin1981}.
+In plasmas, there are often multiple control parameters. For instance, kinetic solar wind turbulence models have two: $\beta$ and $T_\perp/T_\para$~\cite{camporeale2010}). One kinetic turbulence in the
+core of a tokamak has three: $\gamma_E$ (the normalized perpendicular flow shear), $R/L_T$ (the inverse ion temperature gradient scale length normalized to the major radius), and $q/\epsilon$
+(the ratio of the magnetic safety factor to the inverse aspect ratio)~\cite{highcock2012}.
+
+For normal systems, turbulence will be excited when the control parameter becomes large enough such that one of the linear eigenmodes becomes unstable (the real part of the eigenvalue crosses into the
+right half of the complex plane). In general, this is not the case for non-normal systems. In many non-normal systems, turbulence can be sustained when all linear eigenmodes are stable --
+the case of subcritical turbulence. 
+
+\begin{figure}
+\centerline{\includegraphics[width=0.4\textwidth]{subcritical_diagram}}
+\caption{Diagram of a control parameter $R$ versus perturbation amplitude $A$ for two subcritical systems. The first curve (top blue one with $R^{-\Lambda}$ label) represents a system with no
+eigenmode instability for any $R$, but which is stable to finite amplitude perturbations for $R > R_g$. 
+The second (bottom red one with label of ``Eigenmode Unstable'') represents a system with a linear eigenmode instability for $R \ge R_c$, and finite amplitude
+instability for $R_g < R < R_c$.}
+\label{subcritical_diagram}
+\end{figure}
+
+Subcritical systems fall into two categories: those that have stable eigenmodes for all values of the control parameter, and those that have unstable eigenmodes
+when the control parameter becomes large enough. We illustrate these two categories with a diagram in Fig.~\ref{subcritical_diagram}. 
+The upper curve represents the first kind of subcritical system in which no unstable eigenmodes exist for any value of $R$. In this
+case, there is some transitional value of $R$, labeled $R_g$, below which turbulence cannot occur. When a perturbation with amplitude above the line occurs in the system due to external input or noise, 
+turbulence will be excited. Perturbations with amplitude below the line will decay away. Clearly, the higher the value of $R$, the smaller the perturbation needs to be to excite turbulence.
+Experimental evidence and theoretical arguments show this curve should have a $R^{-\Lambda}$ dependence, with $\Lambda \sim 1$~\cite{grossmann2000}.
+A paradigmatic example of this kind of system is Hagen-Poisuille pipe flow -- flow in a cylindrical pipe with a parabolic flow profile -- for which $R_g \approx 2000$.
+
+The lower curve represents the second kind of subcritical system. Above a critical value of the control parameter $R_c$, the system is linearly unstable. But, for $R_g < R < R_c$, the system is
+unstable to finite amplitude perturbations, or ``nonlinearly'' unstable. A paradigmatic example of this is Poissuille channel flow -- the rectangular analog of pipe flow -- for which
+$R_c = 5772$ and $R_g \approx 1000$~\cite{grossmann2000}. Most subcritical magnetically-confined plasma systems fall into this category. It is perhaps easy to be fooled into believing that the turbulence
+in such systems is due to eigenmode instability. In either case, one of the most important predictions is the minimum turbulent control parameter $R_g$.
+
+The HW model in an unsheared magnetic slab is not subcritical in either the 2D or 3D cases, as implied by Figs.~\ref{gamma_max_vs_alpha} and~\ref{gamma_max_vs_kz}. It is subcritical in a highly sheared
+magnetic field~\cite{drake1995}, but the eigenmodes of the linear operator in that case are not sinusoidal, making our non-modal analysis more difficult. Biskamp et al., however, artificially modified the
+3D HW model to remove the linear drive by taking the $z$ average of the $\kappa \pdiff{\phi}{y}$ term in Eq.~\ref{n_eq}, effectively eliminating the $k_z \ne 0$ drive. This leaves only the $k_z = 0$
+component of the drive term. Since the $k_z = 0$ eigenmodes are stable but $k_z = 0$ structures can access the free energy (positive $\gamma_t$ in Fig.~\ref{gamma_max_vs_kz}), this system is subject
+to subcritical turbulence.
+
+We show that the system is subcritical in Fig.~\ref{init_en_ev} by plotting the energy versus time for fluctuations that are initialized with different amplitudes. When the fluctuations are initialized
+with high enough amplitude, the system eventually becomes turbulent. Otherwise, the fluctuations grow transiently, but do not reach high enough amplitude for the nonlinearities to bootstrap the process,
+so they decay away. The finite amplitude turbulence threashold, as described above, is the key indicator of subcritical turbulence.
+
+\begin{figure}
+\centerline{\includegraphics[width=0.4\textwidth]{init_en_ev}}
+\caption{Total energy evolution of fluctuations of the modified 3D HW model where the initial perturbations are set to different amplitudes. All initial perturbations are initialized randomly in
+the $y$ and $z$ directions and with a Guassian in the $x$ direction. There is a critical initial amplitude threashold above which turbulence develops and maintains itself
+and below which turbuelence never develops and the fluctuations decay away. This indicates that the modified model is subject to subcritical turbulence.}
+\label{init_en_ev}
+\end{figure}
+
+
+\begin{acknowledgments}
 This work was supported by the National Science Foundation (Grant PHY-1202007)
+\end{acknowledgments}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
