@@ -125,13 +125,15 @@
 
 Turbulence in magnetically confined plasmas is almost always attributed to linear instabilities. The calculation of linear instabilities through normal mode analysis
 -- the calculation of eigenvalues and eigenvectors of a linearized dynamical system -- has successfully predicted the onset criterion for many MHD and micro-instabilities.
-Nevertheless, it is well-known in the hydrodynamics community that normal mode analysis fails at predicting turbulent onset for a large class of experiments that are deemed to have
-subcritical turbulence. Subcritical turbulence is certainly possible in plasmas, and several instances have been studied in the 
+Nevertheless, it is well-known in the hydrodynamics community that normal mode analysis fails at predicting turbulent onset for a large class of experiments, in which the
+turbulence is called subcritical. In these experiments, turbulence appears even though all linear eigenvectors are stable, meaning infinitesimal perturbations on the laminar state cannot grow
+exponentially. Nevertheless, finite amplitude perturbations can still excite turbulence.
+Subcritical turbulence is certainly possible in plasmas as well, and several instances have been studied in the 
 past~\cite{waltz1985,scott1990,scott1992,nordman1993,biskamp1995,drake1995,camargo1998,krommes1999,scott2002,camporeale2009,camporeale2010,schekochihin2012,highcock2012}. 
 For the most part, however, normal mode analysis dominates plasma turbulence prediction despite the fact that it is not useful in all instances.
 
-Since the hydrodynamics community has long studied subcritical turbulence, it has much to offer in terms of understanding the phenomenon. Most significantly,
-in the early 1990's, Trefethen and others attributed the failure of normal mode analysis in predicting subcritical turbulent onset to the non-normality of linear operators of
+Since the hydrodynamics community has long studied subcritical turbulence, it has much to offer in terms of understanding of the phenomenon. Most significantly,
+in the early 1990s, Trefethen and others attributed the failure of normal mode analysis in predicting subcritical turbulent onset to the non-normality of linear operators of
 dynamical systems~\cite{trefethen1993,schmid2007}. A non-normal operator has 
 eigenvectors that are not orthogonal to one another. One consequence of eigenvector nonorthogonality is that even when all eigenvectors decay exponentially under linear evolution, 
 superpositions of eigenvectors can grow, albeit transiently.
@@ -141,8 +143,8 @@ Such behavior is obscured by traditional normal mode analysis, which only effect
 action of the linear operator. Transient growth, which can dominate turbulent evolution, can be discovered only through non-modal calculations.
 
 Non-modal analysis generally employs tools such as pseudospectra and maximum possible transient growth curves, which have been used to successfully explain why turbulence is subcritical in various
-systems. However, to our knowledge, they have not been used to predict onset criteria in subcritical systems (e.g. the transition Reynold's number in pipe flows), although non-normal
-turbulent arguments have been applied in generating amplitude versus Reynold's number scalings for turbulent onset.
+systems. However, they have not been used to predict onset criteria in subcritical systems (e.g. the transition Reynold's number in pipe flows), although non-normal
+turbulent arguments have been applied in generating amplitude versus Reynold's number scalings for turbulent onset~\cite{grossmann2000}.
 This paper takes up the task of developing a new approach to understand turbulent properties using only non-modal linear calculations with the goal of 
 ultimately making quantitative predictions.  Our approach is to calculate an average growth rate of turbulent fluctuations due to linear processes, specifically due to transient growth.  We model the
 turbulent steady state as a series of processes:  (1) the turbulence starts as a spatially random state, (2) linear transient growth deterministically amplifies the turbulent energy (or
@@ -172,8 +174,8 @@ We associate the direction along $\mathbf{B}$ as the parallel or $z$ direction. 
 points opposite the density gradient is defined as the $x$ direction, and the $y$ direction is taken perpendicular to both of these.
 
 In the analysis and numerical simulations, which we perform with the BOUT++ code~\cite{dudson2009}, we use periodic boundary conditions in
-the $y$ and $z$ directions with zero-value boundaries in the $x$ direction. We use a domain size of $64 \rho_s \times 64 rho_s \times 300 \rho_s$.
-For the 2D version of the model, we replace $-\xi \gradpar^2$ by $\alpha = k_z^2 \xi = 4 \pi k_z^2 \rho_s^2 \omega_{ce} /\nu_{ei}$, 
+the $y$ and $z$ directions with zero-value boundaries in the $x$ direction. We use a domain size of $64 \rho_s \times 64 \rho_s \times 300 \rho_s$.
+For the 2D version of the model, we replace $-\xi \gradpar^2$ by $\alpha (= k_z^2 \xi = 4 \pi k_z^2 \rho_s^2 \omega_{ce} /\nu_{ei})$, 
 which is commonly known as the adiabaticity parameter~\cite{camargo1995,camargo1998}. Additionally we use a domain size of $50 \rho_s \times 50 \rho_s$.
 In numerical simulations, the turbulence can laminarize due to the build-up of $k_y=0$ density and potential structures~\cite{biskamp1995}. To prevent this, we subtract out the $k_y=0$
 $n$ and $\phi$ components, which is the equivalent of adding source terms to Eqs.~\ref{n_eq} and~\ref{phi_eq}~\cite{friedman2012b}.
@@ -214,7 +216,7 @@ we rewrite Eq.~\ref{fourier_eqn} as
 \mathbf{B}_k = \left( \begin{array}{cc} -\xi k_z^2 - D k_\perp^4 & -i \kappa \frac{k_y}{k_\perp} + \xi \frac{k_z^2}{k_\perp} \\  \xi \frac{k_z^2}{k_\perp} & - \xi \frac{k_z^2}{k_\perp^2} - D k_\perp^4\end{array} \right)
 \eeqar
 Since the square $L_2$-norm of the new state vector $\frac{1}{\sqrt{2}} \left( \begin{array}{cc} n_k \\ k_\perp \phi_k \end{array} \right)$ gives the energy contained in the mode $k$,
-$\mathbf{B}_k$ is the energetically-weighted matrix of interest. In the limit of large $\xi k_z^2$ as long as $k_\perp$ is also not too large:
+$\mathbf{B}_k$ is the energetically-weighted matrix of interest. In the limit of large $\xi k_z^2$ (as long as $k_\perp$ is also not too large):
 
 \beq
 \label{B_norm_limit}
@@ -274,8 +276,8 @@ of this may be seen in a review by Schmid~\cite{schmid2007}.
 
 \section{The Effect of Non-Normality on Turbulence}
 
-Linear non-normality is important for the effect it has on turbulence. It is most often cited as the sufficient condition for turbulence in subcritical systems, 
-but it can also impact systems that have unstable linear eigenmodes like the HW system. Since certain superpositions of the linear eigenmodes can inject energy faster than the most unstable linear
+Linear non-normality is important for the effect it has on turbulence. It is most often cited as a necessary condition for turbulence in subcritical systems. 
+But it can also impact systems that have unstable linear eigenmodes like the HW system. Since certain superpositions of the linear eigenmodes can inject energy faster than the most unstable linear
 eigenmode, there is the possibility that the energy injection into the turbulence is faster and at different wavenumbers than is suggested by linear eigenmode analysis. 
 To understand this concept and show that it occurs in the nonlinear HW model, we compare the fastest growing linear eigenmode growth rate $\gamma_{s,k}$ to the turbulent growth rate $\gamma_{t,k}$. 
 To define the turbulent growth rate in general and specifically for the HW model, we employ a Fourier-decomposed energy dynamics analysis~\cite{camargo1995,friedman2012b,friedman2013}. 
@@ -390,18 +392,19 @@ The answer to this came when Camargo et al.~\cite{camargo1998} stated that ``som
 previously attributed to nonlinear terms could also be strongly influenced by the nonnormal character of the linear system.'' Although Camargo et al. focused only on the 2D HW model,
 based on this statement, it was likely apparent to them that the 3D HW nonlinear instability was a result of linear non-normality. 
 Therefore, when $k_z=0$, no matter the value of $\xi$, the adiabaticity parameter $\alpha = k_z^2 \xi = 0$, meaning the linear matrix operator is highly non-normal and subject to transient growth.
-So non-normal effects plays a role in the 3D HW system no matter what value of $\xi$ is chosen due to the presence of $k_z=0$ structures.
+So non-normal effects play a role in the 3D HW system for all $\xi$ due to the presence of $k_z=0$ structures.
 
 \section{Non-Modal Linear Technique To Calculate Turbulent Growth Rate}
 
 In this section, we outline a procedure that uses quick and simple methods to approximate the turbulent growth rates $\gamma_{t,k}$.
 We contend that the key to doing this is to successfully model the effect that the nonlinearities have on the linear (modal and transient) processes.
-First, we note that the advective nonlinearity terms in Eqs.~\ref{n_eq} and~\ref{phi_eq} have the form of the state variable divided by a time $\tau_{nl} \sim (v_E k_\perp)^{-1}$. 
-This nonlinear time scale is generally associated with the eddy turnover or decorrelation time. We therefore present a heuristic model of the nonlinearities 
+First, we note that the advective nonlinearity terms in Eqs.~\ref{n_eq} and~\ref{phi_eq} have a common form -- a state variable multiplied by an inverse time scale:
+$\tau_{nl}^{-1} \sim v_E k_\perp$.
+This nonlinear time scale is generally associated with the eddy turnover or decorrelation time. We thus present a heuristic model of the nonlinearities 
 as a randomizing force that acts on this characteristic nonlinear time scale. More specifically, this model is one in which 1) the turbulence begins as a random state, 
 2) evolves linearly for a time $\tau_{nl}$, and 3) randomizes by nonlinear energy transfer, at which point the steps repeat.
 
-This model can be used by starting with an ensemble of random initial conditions, evolving them linearly for a time $\tau_{nl}$, and
+We can calculate an effective growth rate from this model by starting with an ensemble of random initial conditions, evolving them linearly for a time $\tau_{nl}$, and
 then taking the time and ensemble averaged growth rate of these curves.
 In practice, this procedure can be greatly sped up and simplified. To see this, recall that the time evolution of the energy from an initial condition is
 
@@ -409,27 +412,27 @@ In practice, this procedure can be greatly sped up and simplified. To see this, 
 \label{E_t_from_u0}
 E_k(t) = ||e^{\mathbf{B}_k t} u(0)||^2 = e^{\mathbf{B}_k t} u(0) u^{\dagger}(0) e^{\mathbf{B}_k^{\dagger}t}.
 \eeq
-Since we want to take the $\mathbf{u}(0)$ in the ensemble as random normalized vectors with uncorrelated components, it follows that~\cite{camargo1998}
+Since we want the ensemble of initial conditions ($u(0)$'s) to be random normalized vectors with uncorrelated components, it follows that~\cite{camargo1998}
 
 \beq
 \label{E_t_ensemble_avg}
 \left< E_k(t) \right>_{{\rm{ens}}} = \frac{1}{2} {\rm{tr}} \{ e^{\mathbf{B}_k t} e^{\mathbf{B}^{\dagger}t} \},
 \eeq
-where the normalization is $||\mathbf{u}(0)||^2 = 1$. Mathematically, we define the non-modal growth rate $\gamma_{{\rm{nm}},k}$ as the time averaged instantaneous growth rate:
+where the normalization is $||u(0)||^2 = 1$. Mathematically, we define the non-modal growth rate $\gamma_{{\rm{nm}},k}$ as the time averaged instantaneous growth rate:
 
 \beq
 \label{gamma_nm_calc}
 \gamma_{{\rm{nm}},k} = \frac{1}{\tau_{nl,k}} \int_0^{\tau_{nl,k}} \frac{\pdiff{E_k(t)}{t}}{2 E_k(t)} dt = \frac{1}{2 \tau_{nl,k}} \ {\rm{Log}} \left[ \frac{E_k(\tau_{nl,k})}{E_k(0)}\right].
 \eeq
-Next, we substitute the ensemble averaged energy calculated from Eq.~\ref{E_t_ensemble_avg} for $E_k(t)$, and set $E_k(0) = 1$ by our normalization. Then,
+Taking $E_k(t)$ as the ensemble averaged energy calculated from Eq.~\ref{E_t_ensemble_avg} and set $E_k(0) = 1$ for normalization, we find,
 
 \beq
 \label{gamma_nm}
 \gamma_{{\rm{nm}},k} = \frac{1}{2 \tau_{nl,k}} \ {\rm{Log}} \left<  E_k(\tau_{nl,k}) \right>_{\rm{ens}}
 \eeq
-Now, in order to obtain a simple and quick prediction of $\gamma_{{\rm{nm}},k}$, we must estimate $\tau_{nl,k}$ without having to calculate it directly from a simulation. 
-We thus invoke the conjecture of \emph{critical balance}, which posits that the nonlinear time scale equals the linear time scale at all spatial scales~\cite{schekochihin2012}. This is a fair
-assumption in light of our discussion above, in which we derived the relation: $\gamma_{l,k} = - \gamma_{nl,k}$.
+Now, in order to obtain a simple and quick prediction of $\gamma_{{\rm{nm}},k}$, we must estimate $\tau_{nl,k}$ without having to calculate it directly from a turbulent simulation. 
+We thus invoke the conjecture of \emph{critical balance}, which posits that the nonlinear time scale equals a characteristic linear time scale at all spatial scales~\cite{schekochihin2012}. 
+This is a fair assumption in light of our discussion above, in which we showed that $\gamma_{l,k} = - \gamma_{nl,k}$.
 
 There are two fairly obvious linear time scales in the HW problem. First is the inverse of the linear eigenmode frequency $\omega_{s,k}$
 -- the imaginary part of the eigenvalues of the linear matrix operator $\mathbf{B}_k$.
@@ -480,9 +483,9 @@ Therefore, finding $\gamma_{\gamma,k}$ amounts to a root-finding problem, which 
 We test both of these non-modal growth rates to see if either or both produce good approximations of $\gamma_{t,k}$, especially in comparison to $\gamma_{s,k}$. 
 In Fig.~\ref{alpha1e-5_gamma_spec_compare}, we show the $\gamma_{\omega,k}$ and $\gamma_{\gamma,k}$ spectra for the 2D HW
 model for $\alpha=10^{-5}$ along with the eigenmode and turbulent spectra ($\gamma_{s,k}$ and $\gamma_{t,k}$), which we already provided in Fig.~\ref{alpha1e-5_gamma_s_t}. We do the same for
-$\alpha=1$ in Fig.~\ref{alpha1_gamma_s_t}. For the highly non-normal case ($\alpha = 10^{-5}$), $\gamma_{\omega,k}$ reproduces $\gamma_{t,k}$ in both magnitude and spectral shape. $\gamma_{\gamma,k}$
-is not close in any respect to $\gamma_{t,k}$. On the other hand, for the nearly normal case ($\alpha=1$), $\gamma_{\omega,k}$ does not resemble $\gamma_{t,k}$. $\gamma_{\gamma,k}$ actually is
-fairly similar to $\gamma_{s,k}$, but with a slightly decreased amplitude, making it a closer match to $\gamma_{t,k}$, though it is still not similar for all $k$.
+$\alpha=1$ in Fig.~\ref{alpha1_gamma_spec_compare}. For the highly non-normal case ($\alpha = 10^{-5}$), $\gamma_{\omega,k}$ reproduces $\gamma_{t,k}$ in both magnitude and spectral shape. 
+$\gamma_{\gamma,k}$ is not close in any respect to $\gamma_{t,k}$. On the other hand, for the nearly normal case ($\alpha=1$), $\gamma_{\omega,k}$ does not resemble $\gamma_{t,k}$. 
+$\gamma_{\gamma,k}$ actually is fairly similar to $\gamma_{s,k}$, but with a slightly decreased amplitude, making it a closer match to $\gamma_{t,k}$, though it is still not similar for all $k$.
 
 \begin{figure}
 \centerline{\includegraphics[width=0.45\textwidth]{gamma_max_with_nm}}
@@ -491,7 +494,7 @@ for the 2D HW model. All growth rates are peaks in $k_x-k_y$ space.}
 \label{gamma_max_with_nm}
 \end{figure}
 
-We further test how well the maxima of the non-modal growth rates predict the maxima of the turbulent growth rates. We show the result in Fig.~\ref{gamma_max_with_nm}. For $\alpha < 10^{-3}$,
+We further test how well the maxima of the non-modal growth rates predict the maxima of the turbulent growth rates. We show the result in Fig.~\ref{gamma_max_with_nm}. For $\alpha \le 10^{-4}$,
 in which the system is fairly non-normal, $\gamma_{\omega,k}$ predicts $\gamma_{t,k}$ quite accurately. As the system becomes more normal, $\gamma_{t,k}$ and $\gamma_{\omega,k}$ diverge, with
 $\gamma_{t,k}$ taking on values between $\gamma_{s,k}$ and $\gamma_{\omega,k}$, but generally closer to $\gamma_{s,k}$ for $\alpha \gg 10^{-3}$. 
 This indicates that some assumption in our procedure doesn't work well for systems that are normal or nearly normal. Namely, our assumption
@@ -524,7 +527,8 @@ favored over the linear instability. Again, $\gamma_{\gamma,k}$ does not provide
 \section{Prediction of Control Parameter for Subcritical Turbulent Onset}
 
 In both hydrodynamic and plasma systems, it is important to be able to predict the smallest value of a control parameter for which the system will become turbulent. 
-The control parameter is different for different systems (and models of those systems), and there may be several control parameters for a particular problem. When $d$ control parameters exist in a model, 
+The control parameter is different for different systems (and models of those systems), and there may be several control parameters for a particular problem. 
+When $d$ control parameters exist in a model, 
 there is not a single point in the parameter space at which the system bifurcates to turbulence, rather, there is a $d-1$ manifold that separates the laminar and turbulent states.
 In many hydrodynamic systems driven turbulent by shear flow, there is generally a single control parameter -- the Reynold's number $Re$~\cite{drazin1981}.
 In plasmas, there are often multiple control parameters. For instance, kinetic solar wind turbulence models have two: $\beta$ and $T_\perp/T_\para$~\cite{camporeale2010}). One kinetic turbulence in the
@@ -555,10 +559,12 @@ A paradigmatic example of this kind of system is Hagen-Poisuille pipe flow -- fl
 The lower curve represents the second kind of subcritical system. Above a critical value of the control parameter $R_c$, the system is linearly unstable. But, for $R_g < R < R_c$, the system is
 unstable to finite amplitude perturbations, or ``nonlinearly'' unstable. A paradigmatic example of this is Poissuille channel flow -- the rectangular analog of pipe flow -- for which
 $R_c = 5772$ and $R_g \approx 1000$~\cite{grossmann2000}. Most subcritical magnetically-confined plasma systems fall into this category. It is perhaps easy to be fooled into believing that the turbulence
-in such systems is due to eigenmode instability. In either case, one of the most important predictions is the minimum turbulent control parameter $R_g$.
+in such systems is due to eigenmode instability. In either case, one of the most important predictions is the minimum turbulent control parameter $R_g$. Given that this problem is many decades old
+and still unsolved, it is a tall order to predict $R_g$ without nonlinear simulations. We nevertheless make an attempt.
 
 The HW model in an unsheared magnetic slab is not subcritical in either the 2D or 3D cases, as implied by Figs.~\ref{gamma_max_vs_alpha} and~\ref{gamma_max_vs_kz}. It is subcritical in a highly sheared
-magnetic field~\cite{drake1995}, but the eigenmodes of the linear operator in that case are not sinusoidal, making our non-modal analysis more difficult. Biskamp et al., however, artificially modified the
+magnetic field~\cite{drake1995}, but the eigenmodes of the linear operator in that case are not sinusoidal, making our non-modal analysis more difficult. 
+Biskamp et al., however, artificially modified the
 3D HW model to remove the linear drive by taking the $z$ average of the $\kappa \pdiff{\phi}{y}$ term in Eq.~\ref{n_eq}, effectively eliminating the $k_z \ne 0$ drive. This leaves only the $k_z = 0$
 component of the drive term. Since the $k_z = 0$ eigenmodes are stable but $k_z = 0$ structures can access the free energy (positive $\gamma_t$ in Fig.~\ref{gamma_max_vs_kz}), this system is subject
 to subcritical turbulence.
@@ -573,6 +579,12 @@ so they decay away. The finite amplitude turbulence threashold, as described abo
 the $y$ and $z$ directions and with a Guassian in the $x$ direction. There is a critical initial amplitude threashold above which turbulence develops and maintains itself
 and below which turbuelence never develops and the fluctuations decay away. This indicates that the modified model is subject to subcritical turbulence.}
 \label{init_en_ev}
+\end{figure}
+
+\begin{figure}
+\centerline{\includegraphics[width=0.4\textwidth]{kappa_en_ev}}
+\caption{}
+\label{kappa_en_ev}
 \end{figure}
 
 
