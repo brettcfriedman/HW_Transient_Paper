@@ -126,15 +126,16 @@
 Turbulence in magnetically confined plasmas is almost always attributed to linear instabilities. The calculation of linear instabilities through normal mode analysis
 -- the calculation of eigenvalues and eigenvectors of a linearized dynamical system -- has successfully predicted the onset criterion for many MHD and micro-instabilities.
 Nevertheless, it is well-known in the hydrodynamics community that normal mode analysis fails at predicting turbulent onset for a large class of experiments, in which the
-turbulence is called subcritical. In these experiments, turbulence appears even though all linear eigenvectors are stable, meaning infinitesimal perturbations on the laminar state cannot grow
-exponentially. Nevertheless, finite amplitude perturbations can still excite turbulence.
+turbulence is called subcritical~\cite{drazin1981}. 
+In these experiments, turbulence appears even though all linear eigenvectors are stable, meaning infinitesimal perturbations on the laminar state cannot grow exponentially. 
+Nevertheless, finite amplitude perturbations can still excite turbulence.
 Subcritical turbulence is certainly possible in plasmas as well, and several instances have been studied in the 
-past~\cite{waltz1985,scott1990,scott1992,nordman1993,biskamp1995,drake1995,camargo1998,krommes1999,scott2002,camporeale2009,camporeale2010,schekochihin2012,highcock2012}. 
+past~\cite{waltz1985,scott1990,nordman1993,biskamp1995,drake1995,itoh1996,camargo1998,krommes1999,camporeale2009,schekochihin2012,highcock2012}. 
 For the most part, however, normal mode analysis dominates plasma turbulence prediction despite the fact that it is not useful in all instances.
 
 Since the hydrodynamics community has long studied subcritical turbulence, it has much to offer in terms of understanding of the phenomenon. Most significantly,
-in the early 1990s, Trefethen and others attributed the failure of normal mode analysis in predicting subcritical turbulent onset to the non-normality of linear operators of
-dynamical systems~\cite{trefethen1993,schmid2007}. A non-normal operator has 
+in the early 1990s, several researchers attributed the failure of normal mode analysis in predicting subcritical turbulent onset to the non-normality of linear operators of
+dynamical systems~\cite{gustavsson1991,butler1992,trefethen1993,reddy1993,henningson1994,schmid2007}. A non-normal operator has 
 eigenvectors that are not orthogonal to one another. One consequence of eigenvector nonorthogonality is that even when all eigenvectors decay exponentially under linear evolution, 
 superpositions of eigenvectors can grow, albeit transiently.
 In other words, certain fluctuations of the laminar state can access free energy from background gradients even though normal mode fluctuations cannot.
@@ -142,17 +143,19 @@ When combined with nonlinear effects, this allows for sustained subcritical turb
 Such behavior is obscured by traditional normal mode analysis, which only effectively describes the long time asymptotic behavior of fluctuations under  
 action of the linear operator. Transient growth, which can dominate turbulent evolution, can be discovered only through non-modal calculations.
 
-Non-modal analysis generally employs tools such as pseudospectra and maximum possible transient growth curves, which have been used to successfully explain why turbulence is subcritical in various
-systems. However, they have not been used to predict onset criteria in subcritical systems (e.g. the transition Reynold's number in pipe flows), although non-normal
-turbulent arguments have been applied in generating amplitude versus Reynold's number scalings for turbulent onset~\cite{grossmann2000}.
-This paper takes up the task of developing a new approach to understand turbulent properties using only non-modal linear calculations with the goal of 
-ultimately making quantitative predictions.  Our approach is to calculate an average growth rate of turbulent fluctuations due to linear processes, specifically due to transient growth.  We model the
-turbulent steady state as a series of processes:  (1) the turbulence starts as a spatially random state, (2) linear transient growth deterministically amplifies the turbulent energy (or
-decrease it in wavenumber ranges where linear damping dominates), (3) nonlinear transfer sets in at a specified timescale, terminating the
-transient growth process and re-randomizing the turbulent state (at which point the cycle repeats).    Optimally, the timescale for the final step would be the
-nonlinear decorrelation time of the turbulent system, but in order to enable predictive capability, we employ critical balance
-arguments to use a characteristic \emph{linear} time. The procedure ultimately produces a growth rate that can be used
-to predict turbulent properties such as saturation levels and transport rates through mixing length arguments.
+Non-modal analysis generally employs tools such as pseudospectra and maximum growth curves, which have been used to successfully explain why turbulence is subcritical in various instances. 
+However, they have not been used to predict onset criteria in subcritical systems (e.g. the transition Reynold's number in pipe flows).
+This paper outlines and illustrates a non-modal linear method to make quantitative predictions of turbulent properties including turbulent onset criteria. 
+Our approach is to define a non-modal growth rate that is analagous to an eigenmode growth rate, but which takes into account transient growth effects. To accomplish this, we make
+several simplifying assumptions regarding the nonlinearities; namely, the nonlinearities randomize the spatial structures of the turbulence on a characteristic nonlinear time scale, which can
+be estimated by a characteristic linear time scale.
+
+More specifically, we model the turbulent steady state as a series of processes:  (1) the turbulence starts as a spatially random state, 
+(2) linear transient growth deterministically amplifies the turbulent energy (or decrease it in wavenumber ranges where linear damping dominates), 
+(3) nonlinear transfer sets in at a specified timescale, terminating the transient growth process and re-randomizing the turbulent state (at which point the cycle repeats). 
+Optimally, the timescale for the final step would be the nonlinear decorrelation time of the turbulent system, but in order to enable predictive capability, we employ critical balance
+arguments to use a characteristic linear time. The procedure ultimately produces a growth rate that can be used to predict turbulent properties such as saturation levels and transport rates 
+through mixing length arguments. Furthermore, The sign of the growth rate predicts whether or not turbulence can exist -- a positive growth rate predicting turbulence.
 
 \section{Non-Normality of the Hasegawa-Wakatani Model}
 
@@ -366,8 +369,9 @@ $\gamma_{t,k} \gg \gamma_{s,k}$ as $\alpha \to 0$. Additionally, when $\alpha$ b
 
 For both the normal and highly non-normal limits of the 2D HW model, $\gamma_{s,k}$ does a poor job of predicting $\gamma_{t,k}$ because $\gamma_{s,k}$ neglects the stable branch of the
 dispersion relation -- the damped eigenmode. The importance of the stable eigenmode branch (or branches) 
-has started to gain acceptance in the plasma community, although it has generally been used in normal
-or nearly normal systems to explain turbulent saturation~\cite{terry2006b} ($\gamma_{t,k} < \gamma_{s,k}$). The case of highly non-normal turbulence and the associated increased turbulent excitation
+has started to gain acceptance in the plasma community~\cite{baver2002}, although it has generally been used in normal
+or nearly normal systems to explain turbulent saturation~\cite{terry2006b,hatch2011,makwana2011} ($\gamma_{t,k} < \gamma_{s,k}$). 
+The case of highly non-normal turbulence and the associated increased turbulent excitation
 hasn't been understood as well. In fact, simulation and analysis of the 3D HW model (and extended models) is an area in which others have seen the effects of strong non-normal transient growth
 but have not realized them as such.
 
