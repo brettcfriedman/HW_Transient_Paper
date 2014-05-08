@@ -104,7 +104,7 @@
 
 \begin{document}
 
-\title{}
+\title{A Procedure to Predict the Subcritical Turbulent Onset Criterion Applied to a Modified Hasegawa-Wakatani Model}
 
 \author{B. Friedman}
 \email{friedman@physics.ucla.edu}
@@ -158,8 +158,10 @@ arguments to use a characteristic linear time. The procedure ultimately produces
 through mixing length arguments. Furthermore, The sign of the growth rate predicts whether or not turbulence can exist -- a positive growth rate predicting turbulence.
 
 \section{Non-Normality of the Hasegawa-Wakatani Model}
+\label{sec_hw_model}
 
-Before employing the non-modal technique, we explore the effect of non-normality in the well-known and well-analyzed Hasegawa-Wakatani (HW) model~\cite{hasegawa1983}. 
+In order to illustrate and test our non-modal technique, we use as an example the well-known and well-analyzed Hasegawa-Wakatani (HW) model~\cite{hasegawa1983}.
+In this section, we analyze the linear normality of the model.
 We consider both the original 2D and the extended 3D~\cite{biskamp1995} versions of the model in a straight, unsheared magnetic field. 
 The HW model consists of two equations for the density $n$ and the electrostatic potential $\phi$. The 3D version of the model is
 
@@ -172,7 +174,7 @@ The HW model consists of two equations for the density $n$ and the electrostatic
 The normalizations are $\phi \to e \phi/T_e, n \to n/n_0, \grad \to \rho_s \grad , x,y,z \to x,y,z/\rho_s, t \to \omega_{ci} t $. Additionally,
 $\mathbf{v_E} = \mathbf{b} \times \grad \phi$, $\xi = 4 \pi \omega_{ce}/\nu_{ei}$, 
 and $\kappa = \rho_s/L_n$, where $L_n$ is the density scale length. The terms $D \gradperp^4 n$ and $D \gradperp^6 \phi$ are artificial hyper-diffusion and hyper-viscosity used to dissipate
-energy on small scales. We set $D \to 10^{-5}$ except when otherwise indicated.
+energy on small scales. We set $D \to 10^{-5}$ except in Sec.~\ref{sec_subcrit_prediction} where we set it to $0.5$.
 We associate the direction along $\mathbf{B}$ as the parallel or $z$ direction. The direction perpendicular $\mathbf{B}$ that
 points opposite the density gradient is defined as the $x$ direction, and the $y$ direction is taken perpendicular to both of these.
 
@@ -278,6 +280,7 @@ their superposition, which constitutes the total system at $k$, may linearly evo
 of this may be seen in a review by Schmid~\cite{schmid2007}.
 
 \section{The Effect of Non-Normality on Turbulence}
+\label{sec_non_norm_turb}
 
 Linear non-normality is important for the effect it has on turbulence. It is most often cited as a necessary condition for turbulence in subcritical systems. 
 But it can also impact systems that have unstable linear eigenmodes like the HW system. Since certain superpositions of the linear eigenmodes can inject energy faster than the most unstable linear
@@ -378,12 +381,13 @@ but have not realized them as such.
 
 \begin{figure}
 \centerline{\includegraphics[width=0.4\textwidth]{gamma_max_vs_kz}}
-\caption{The growth rates of the fastest growing eigenmode $\gamma_{s,k}$ and the of the turbulence $\gamma_{t,k}$ as a function of $k_z$ for the 3D HW model. The most remarkable feature is
+\caption{The growth rates of the fastest growing eigenmode $\gamma_{s,k}$ and the of the turbulence $\gamma_{t,k}$ as a function of $k_z$ for the 3D HW model at $\xi = 10^3$. The most remarkable feature is
 that the turbulent growth rate peaks at $k_z=0$ despite the stability of all linear eigenmodes at $k_z=0$.}
 \label{gamma_max_vs_kz}
 \end{figure}
 
-The 3D HW model nonlinear simulation has a fascinating property -- the turbulent energy injection is strongest at $k_z = 0$ despite the fact that there can be no unstable linear eigenmodes at $k_z=0$.
+The 3D HW model nonlinear simulation has a fascinating property -- the turbulent energy injection is positive at $k_z = 0$ despite the fact that there can be no unstable linear eigenmodes at $k_z=0$.
+In fact, for high enough values of $\xi$ ($\xi \ge 10^2$), more energy is injected at $k_z = 0$ than at finite $k_z$ (see Fig.~\ref{gamma_max_vs_xi} below for more details).
 We show this in Fig.~\ref{gamma_max_vs_kz} using the eigenmode $\gamma_{s,k}$ and turbulent $\gamma_{t,k}$ growth rates, plotting them as a function of $k_z$.
 The long-stated cause of this $k_z=0$ energy injection is a nonlinear instability, which was discovered by Biaskamp and Zeiler~\cite{biskamp1995} and explored further by Drake et al.~\cite{drake1995}. 
 The nonlinear instability works as follows: magnetic-field-aligned ($k_z=0$) convective cells transport density across the equilibrium density gradient, setting up $k_z=0$ density structures. 
@@ -398,7 +402,8 @@ based on this statement, it was likely apparent to them that the 3D HW nonlinear
 Therefore, when $k_z=0$, no matter the value of $\xi$, the adiabaticity parameter $\alpha = k_z^2 \xi = 0$, meaning the linear matrix operator is highly non-normal and subject to transient growth.
 So non-normal effects play a role in the 3D HW system for all $\xi$ due to the presence of $k_z=0$ structures.
 
-\section{Non-Modal Linear Technique To Calculate Turbulent Growth Rate}
+\section{Non-Modal Linear Procedure To Calculate Turbulent Growth Rate}
+\label{sec_nm_procedure}
 
 In this section, we outline a procedure that uses quick and simple methods to approximate the turbulent growth rates $\gamma_{t,k}$.
 We contend that the key to doing this is to successfully model the effect that the nonlinearities have on the linear (modal and transient) processes.
@@ -509,7 +514,7 @@ It is closest to $\gamma_{t,k}$ for $\alpha \ge 1$, however, it only provides a 
 \begin{figure}
 \centerline{\includegraphics[width=0.4\textwidth]{gamma_max_vs_kz_with_nm}}
 \caption{Comparison of the non-modal growth rates, $\gamma_{\omega,k}$ and $\gamma_{\gamma,k}$, to the growth rates of the fastest growing eigenmode $\gamma_{s,k}$ 
-and the of the turbulence $\gamma_{t,k}$ as a function of $k_z$ for the 3D HW model. The non-modal growth rates correctly predict the growth rate dominance of the $k_z=0$ mode
+and the of the turbulence $\gamma_{t,k}$ as a function of $k_z$ for the 3D HW model with $\xi = 10^3$. The non-modal growth rates correctly predict the growth rate dominance of the $k_z=0$ mode
 despite the $k_z=0$ eigenmode stability.}
 \label{gamma_max_vs_kz_with_nm}
 \end{figure}
@@ -523,25 +528,29 @@ by the drift waves, not the convective cells, making $1/\omega_{s,k_z=0.02}$ a g
 off of the $k_z=0$ density structures, so the appropriate scale length to use for $\omega_{s,k_z=0.02}$ is not given by $\kappa$, but by the scale length of the density structures. We don't deal
 with this complication and assume the scale length of the fluctuating density structures is the same as the background.
 
-Despite these complications at $k_z=0$, our non-modal method of calculating $\gamma_{\omega,k}$ approximates $\gamma_{t,k}$ remarkably well as seen in Fig.~\ref{gamma_max_vs_kz_with_nm}.
-Most importantly, it correctly predicts that $\gamma_{\omega,k_z=0} > 0$ and $\gamma_{\omega,k_z=0} > \gamma_{\omega,k_z \ne 0}$. Therefore, non-modal calculations explain why the 3D HW model
-is dominated by the nonlinear instability rather than a linear drift wave instability. Simply put, transient growth is strongest at $k_z=0$, so the nonlinear instability is energetically
+\begin{figure}
+\centerline{\includegraphics[width=0.55\textwidth]{gamma_max_vs_xi}}
+\caption{Comparison of the maximum non-modal growth rates, $\gamma_{\omega,k}$ and $\gamma_{\gamma,k}$, to the growth rates of the fastest growing eigenmode $\gamma_{s,k}$ 
+and the of the turbulence $\gamma_{t,k}$ as a function of $\xi$ for the 3D HW model at {\bf a)} $k_z \rho_s = 0$ and {\bf b)} $k_z \rho_s \approx 0.02$. 
+As in the 2D model, $\gamma_{\omega,k}$ does }
+\label{gamma_max_vs_xi}
+\end{figure}
+
+Despite these complications at $k_z=0$, our non-modal method of calculating $\gamma_{\omega,k}$ approximates $\gamma_{t,k}$ remarkably well as seen in Figs.~\ref{gamma_max_vs_kz_with_nm}
+and~\ref{gamma_max_vs_xi}.
+Most importantly, it correctly predicts that $\gamma_{\omega,k_z=0} > 0$ and $\gamma_{\omega,k_z=0} > \gamma_{\omega,k_z \ne 0}$ for $\xi \ge 10^{2}$. 
+Therefore, non-modal calculations explain why the 3D HW model is dominated by the nonlinear instability (for $\xi \ge 10^{2}$) rather than a linear drift wave instability. 
+Simply put, transient growth is strongest at $k_z=0$, so the nonlinear instability is energetically
 favored over the linear instability. Again, $\gamma_{\gamma,k}$ does not provide enough accuracy to warrant its use.
 
 \section{Prediction of Control Parameter for Subcritical Turbulent Onset}
+\label{sec_subcrit_prediction}
 
-In both hydrodynamic and plasma systems, it is important to be able to predict the smallest value of a control parameter for which the system will become turbulent. 
-The control parameter is different for different systems (and models of those systems), and there may be several control parameters for a particular problem. 
-When $d$ control parameters exist in a model, 
-there is not a single point in the parameter space at which the system bifurcates to turbulence, rather, there is a $d-1$ manifold that separates the laminar and turbulent states.
-In many hydrodynamic systems driven turbulent by shear flow, there is generally a single control parameter -- the Reynold's number $Re$~\cite{drazin1981}.
-In plasmas, there are often multiple control parameters. For instance, kinetic solar wind turbulence models have two: $\beta$ and $T_\perp/T_\para$~\cite{camporeale2010}). One kinetic turbulence in the
-core of a tokamak has three: $\gamma_E$ (the normalized perpendicular flow shear), $R/L_T$ (the inverse ion temperature gradient scale length normalized to the major radius), and $q/\epsilon$
-(the ratio of the magnetic safety factor to the inverse aspect ratio)~\cite{highcock2012}.
-
-For normal systems, turbulence will be excited when the control parameter becomes large enough such that one of the linear eigenmodes becomes unstable (the real part of the eigenvalue crosses into the
-right half of the complex plane). In general, this is not the case for non-normal systems. In many non-normal systems, turbulence can be sustained when all linear eigenmodes are stable --
-the case of subcritical turbulence. 
+In both hydrodynamic and plasma systems, it is important to be able to predict the control parameter space that divides the turbulent and laminar states.
+In many hydrodynamic systems with sheared flow, there is generally a single control parameter -- the Reynold's number $Re$~\cite{drazin1981}. For high enough $Re$ such systems
+can be turbulent, but for low $Re$ they are always laminar.
+Normal systems will undergo a bifurcation from a laminar to non-laminar state when the control parameters are such that at least one of the linear eigenmodes is unstable~\cite{grossmann2000}.
+In general, this is not true for non-normal systems. In many non-normal systems, turbulence can be sustained when all linear eigenmodes are stable -- the case of subcritical turbulence. 
 
 \begin{figure}
 \centerline{\includegraphics[width=0.4\textwidth]{subcritical_diagram}}
@@ -553,7 +562,7 @@ instability for $R_g < R < R_c$.}
 \end{figure}
 
 Subcritical systems fall into two categories: those that have stable eigenmodes for all values of the control parameter, and those that have unstable eigenmodes
-when the control parameter becomes large enough. We illustrate these two categories with a diagram in Fig.~\ref{subcritical_diagram}. 
+when the control parameter becomes large (or small) enough. We illustrate these two categories with a diagram in Fig.~\ref{subcritical_diagram}. 
 The upper curve represents the first kind of subcritical system in which no unstable eigenmodes exist for any value of $R$. In this
 case, there is some transitional value of $R$, labeled $R_g$, below which turbulence cannot occur. When a perturbation with amplitude above the line occurs in the system due to external input or noise, 
 turbulence will be excited. Perturbations with amplitude below the line will decay away. Clearly, the higher the value of $R$, the smaller the perturbation needs to be to excite turbulence.
@@ -563,7 +572,8 @@ A paradigmatic example of this kind of system is Hagen-Poisuille pipe flow -- fl
 The lower curve represents the second kind of subcritical system. Above a critical value of the control parameter $R_c$, the system is linearly unstable. But, for $R_g < R < R_c$, the system is
 unstable to finite amplitude perturbations, or ``nonlinearly'' unstable. A paradigmatic example of this is Poissuille channel flow -- the rectangular analog of pipe flow -- for which
 $R_c = 5772$ and $R_g \approx 1000$~\cite{grossmann2000}. Most subcritical magnetically-confined plasma systems fall into this category. It is perhaps easy to be fooled into believing that the turbulence
-in such systems is due to eigenmode instability. In either case, one of the most important predictions is the minimum turbulent control parameter $R_g$. Given that this problem is many decades old
+in such systems is due to eigenmode instability. In either case, one of the most important predictions is the minimum turbulent control parameter $R_g$, which is sometimes called the ``transitional''
+vlue of the control parameter. Given that this problem is many decades old
 and still unsolved, it is a tall order to predict $R_g$ without nonlinear simulations. We nevertheless make an attempt.
 
 The HW model in an unsheared magnetic slab is not subcritical in either the 2D or 3D cases, as implied by Figs.~\ref{gamma_max_vs_alpha} and~\ref{gamma_max_vs_kz}. It is subcritical in a highly sheared
@@ -575,7 +585,8 @@ to subcritical turbulence.
 
 We show that the system is subcritical in Fig.~\ref{init_en_ev} by plotting the energy versus time for fluctuations that are initialized with different amplitudes. When the fluctuations are initialized
 with high enough amplitude, the system eventually becomes turbulent. Otherwise, the fluctuations grow transiently, but do not reach high enough amplitude for the nonlinearities to bootstrap the process,
-so they decay away. The finite amplitude turbulence threashold, as described above, is the key indicator of subcritical turbulence.
+so they decay away (we set the diffusion and viscosity coefficient $D$ to $0.5$ in this section so that the decay occurs on a short enough time scale to keep the simulations short). 
+The finite amplitude turbulence threashold, as described above, is a key indicator of subcritical turbulence.
 
 \begin{figure}
 \centerline{\includegraphics[width=0.4\textwidth]{init_en_ev}}
@@ -585,9 +596,23 @@ and below which turbuelence never develops and the fluctuations decay away. This
 \label{init_en_ev}
 \end{figure}
 
+In this subcritical system, we predict the line in $\xi-\kappa$ parameter space that divides the space into an area that permits turbulent solutions and an area that does not. Note that we are
+not concerend here with amplitude threasholds. We simply want to know for given values of $\xi$ and $\kappa$ whether turbuelence can exist given a sufficiently large perturbation. Our method
+of prediction is to find the line in $\xi-\kappa$ space at which $\gamma_\omega = 0$, where $\gamma_\omega$ is maximized over $k_x$ and $k_y$. We plot this line in Fig.~\ref{subcrit_param_space}
+
+\begin{figure}
+\centerline{\includegraphics[width=0.4\textwidth]{subcrit_param_space}}
+\caption{The non-modal curve $\gamma_\omega(\kappa,\xi) = 0$, which defines our prediction of the transitional value of $\kappa(\xi)$ for the subcritical 3D HW model. The points represent the
+transitional values of $\kappa(\xi)$ based on full nonlinear simulations.}
+\label{subcrit_param_space}
+\end{figure}
+
+
 \begin{figure}
 \centerline{\includegraphics[width=0.4\textwidth]{kappa_en_ev}}
-\caption{}
+\caption{$E_{\rm{tot}}(t)$ from full nonlinear simulations of the subcritical 3D HW model. The curves that reach a steady-state value
+reach sustained subcritically turbulent states. Those that decay for large time have values of $\kappa$ too small to sustain turbulence. The transitional value of $\kappa$ is the smallest value
+for which turbulence is sustained.}
 \label{kappa_en_ev}
 \end{figure}
 
