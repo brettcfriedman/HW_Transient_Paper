@@ -425,7 +425,7 @@ Since we want the ensemble of initial conditions ($u(0)$'s) to be random normali
 
 \beq
 \label{E_t_ensemble_avg}
-\left< E_k(t) \right>_{{\rm{ens}}} = \frac{1}{2} {\rm{tr}} \{ e^{\mathbf{B}_k t} e^{\mathbf{B}^{\dagger}t} \},
+\left< E_k(t) \right>_{{\rm{ens}}} = \frac{1}{2} {\rm{tr}} \{ e^{\mathbf{B}_k t} e^{\mathbf{B}_k^{\dagger}t} \},
 \eeq
 where the normalization is $||u(0)||^2 = 1$. Mathematically, we define the non-modal growth rate $\gamma_{{\rm{nm}},k}$ as the time averaged instantaneous growth rate:
 
@@ -443,105 +443,107 @@ Now, in order to obtain a simple and quick prediction of $\gamma_{{\rm{nm}},k}$,
 We thus invoke the conjecture of \emph{critical balance}, which posits that the nonlinear time scale equals a characteristic linear time scale at all spatial scales~\cite{schekochihin2012}. 
 This is a fair assumption in light of our discussion above, in which we showed that $\gamma_{l,k} = - \gamma_{nl,k}$.
 
-There are two fairly obvious linear time scales in the HW problem. First is the inverse of the linear eigenmode frequency $\omega_{s,k}$
+There are a several possible linear time scales in the HW problem to use for $\tau_{nl,k}$ 
+including inverse linear eigenmode frequency and growth rates as well as certain times associated with transient growth curves. 
+After trying a few of these different time scales, we have concluded that the one that works best is the inverse of the linear eigenmode frequency $\omega_{s,k}$
 -- the imaginary part of the eigenvalues of the linear matrix operator $\mathbf{B}_k$.
-Recall that the imaginary part of the linear eigenvalues is the same for both eigenvalues of $\mathbf{B}_k$, so there is no question of which to use. We thus define the first non-modal
-growth rate $\gamma_{\omega,k}$ as
+Recall that the imaginary part of the linear eigenvalues is the same for both eigenvalues of $\mathbf{B}_k$, so there is no question of which to use. Because of this, unlike the eigenmode growth rates,
+the frequency is robust no matter how nonorthogonal the eigenvectors. We thus arrive at our final definition for the non-modal growth rate:
 
 \beq
 \label{gamma_omega_def}
-\gamma_{\omega,k} = \frac{\omega_{s,k}}{2} \ {\rm{Log}} \left< E_k(1/\omega_{s,k}) \right>_{\rm{ens}}.
+\gamma_{\rm{nm},k} = \frac{\omega_{s,k}}{4} \ {\rm{Log}} \left[ {\rm{tr}} \{ e^{\mathbf{B}_k t} e^{\mathbf{B}^{\dagger}t} \} \right].
 \eeq
-This growth rate is calculated by first finding $\omega_{s,k}$ of $\mathbf{B}_k$, and then inserting this into Eq.~\ref{gamma_omega_def} using the definition of 
-$\left< E_k(1/\omega_{s,k}) \right>_{\rm{ens}}$ from Eq.~\ref{E_t_ensemble_avg}.
+Note that the factor of $\frac{1}{4}$ is particular to two-field systems. Namely, the factor of $\frac{1}{2}$ coming from Eq.~\ref{E_t_ensemble_avg} is a consequence of the $2 \times 2$ size
+of $\mathbf{B}_k$.
 
-The second linear time scale that we may use is the inverse of the linear growth rate. However, the eigenvalues of $\mathbf{B}_k$ have different growth rates (real parts). 
-Furthermore, we have argued that the eigenmode growth rates have little bearing on turbulence, especially for highly non-normal turbulence, 
-so it would be innappropriate to use either of the linear eigenmode growth rates as a proxy for the nonlinear time scale.
-Rather, we use the result itself, $\gamma_{{\rm{nm}},k}$, as the inverse of $\tau_{nl,k}$. Substituting $1/|\gamma_{{\rm{nm}},k}|$ for $\tau_{nl,k}$ in Eq.~\ref{gamma_nm_calc}, we get
-a transcendental equation:
-
-\beq
-\label{trans_gamma_nm}
-\gamma_{{\rm{nm}},k} = \frac{|\gamma_{{\rm{nm}},k}|}{2} \ {\rm{Log}} \left< E_k(1/|\gamma_{{\rm{nm}},k}|) \right>_{\rm{ens}}.
-\eeq
-We label this second non-modal growth rate $\gamma_{\gamma,k}$, and ultimately simplify this equation to
-
-\begin{figure}
-\centerline{\includegraphics[width=0.52\textwidth]{alpha1e-5_gamma_spec_compare}}
-\caption{a) The eigenmode growth rate spectrum $\gamma_{s,k}$,  b) the turbulent growth rate spectrum $\gamma_{t,k}$, c) the non-modal growth rate spectrum $\gamma_{\omega,k}$ d) and the 
-non-modal growth rate spectrum $\gamma_{\gamma,k}$ for the 2D HW model with $\alpha = 10^{-5}, \kappa=1$. Note the different scales.}
-\label{alpha1e-5_gamma_spec_compare}
-\end{figure}
-
-\begin{figure}
-\centerline{\includegraphics[width=0.52\textwidth]{alpha1_gamma_spec_compare}}
-\caption{a) The eigenmode growth rate spectrum $\gamma_{s,k}$,  b) the turbulent growth rate spectrum $\gamma_{t,k}$, c) the non-modal growth rate spectrum $\gamma_{\omega,k}$ d) and the 
-non-modal growth rate spectrum $\gamma_{\gamma,k}$ for the 2D HW model with $\alpha = 1, \kappa=1$.}
-\label{alpha1_gamma_spec_compare}
-\end{figure}
-
-
-\beq
-\label{gamma_pm2}
-\left< E_k(1/|\gamma_{\gamma,k}|) \right>_{\rm{ens}} = e^{\pm 2},
-\eeq
-where if $\left< E_k(t) \right>_{\rm{ens}}$ first reaches $e^2$, $\gamma_{\gamma,k}$ is positive, and if it first reaches $e^{-2}$, $\gamma_{\gamma,k}$ is negative.
-Therefore, finding $\gamma_{\gamma,k}$ amounts to a root-finding problem, which is not trivial, but is much simpler than a nonlinear simulation. 
-
-We test both of these non-modal growth rates to see if either or both produce good approximations of $\gamma_{t,k}$, especially in comparison to $\gamma_{s,k}$. 
-In Fig.~\ref{alpha1e-5_gamma_spec_compare}, we show the $\gamma_{\omega,k}$ and $\gamma_{\gamma,k}$ spectra for the 2D HW
-model for $\alpha=10^{-5}$ along with the eigenmode and turbulent spectra ($\gamma_{s,k}$ and $\gamma_{t,k}$), which we already provided in Fig.~\ref{alpha1e-5_gamma_s_t}. We do the same for
-$\alpha=1$ in Fig.~\ref{alpha1_gamma_spec_compare}. For the highly non-normal case ($\alpha = 10^{-5}$), $\gamma_{\omega,k}$ reproduces $\gamma_{t,k}$ in both magnitude and spectral shape. 
-$\gamma_{\gamma,k}$ is not close in any respect to $\gamma_{t,k}$. On the other hand, for the nearly normal case ($\alpha=1$), $\gamma_{\omega,k}$ does not resemble $\gamma_{t,k}$. 
-$\gamma_{\gamma,k}$ actually is fairly similar to $\gamma_{s,k}$, but with a slightly decreased amplitude, making it a closer match to $\gamma_{t,k}$, though it is still not similar for all $k$.
+%The second linear time scale that we may use is the inverse of the linear growth rate. However, the eigenvalues of $\mathbf{B}_k$ have different growth rates (real parts). 
+%Furthermore, we have argued that the eigenmode growth rates have little bearing on turbulence, especially for highly non-normal turbulence, 
+%so it would be innappropriate to use either of the linear eigenmode growth rates as a proxy for the nonlinear time scale.
+%Rather, we use the result itself, $\gamma_{{\rm{nm}},k}$, as the inverse of $\tau_{nl,k}$. Substituting $1/|\gamma_{{\rm{nm}},k}|$ for $\tau_{nl,k}$ in Eq.~\ref{gamma_nm_calc}, we get
+%a transcendental equation:
+%
+%\beq
+%\label{trans_gamma_nm}
+%\gamma_{{\rm{nm}},k} = \frac{|\gamma_{{\rm{nm}},k}|}{2} \ {\rm{Log}} \left< E_k(1/|\gamma_{{\rm{nm}},k}|) \right>_{\rm{ens}}.
+%\eeq
+%We label this second non-modal growth rate $\gamma_{\gamma,k}$, and ultimately simplify this equation to
+%
+%\begin{figure}
+%\centerline{\includegraphics[width=0.52\textwidth]{alpha1e-5_gamma_spec_compare}}
+%\caption{a) The eigenmode growth rate spectrum $\gamma_{s,k}$,  b) the turbulent growth rate spectrum $\gamma_{t,k}$, c) the non-modal growth rate spectrum $\gamma_{\omega,k}$ d) and the 
+%non-modal growth rate spectrum $\gamma_{\gamma,k}$ for the 2D HW model with $\alpha = 10^{-5}, \kappa=1$. Note the different scales.}
+%\label{alpha1e-5_gamma_spec_compare}
+%\end{figure}
+%
+%\begin{figure}
+%\centerline{\includegraphics[width=0.52\textwidth]{alpha1_gamma_spec_compare}}
+%\caption{a) The eigenmode growth rate spectrum $\gamma_{s,k}$,  b) the turbulent growth rate spectrum $\gamma_{t,k}$, c) the non-modal growth rate spectrum $\gamma_{\omega,k}$ d) and the 
+%non-modal growth rate spectrum $\gamma_{\gamma,k}$ for the 2D HW model with $\alpha = 1, \kappa=1$.}
+%\label{alpha1_gamma_spec_compare}
+%\end{figure}
+%
+%
+%\beq
+%\label{gamma_pm2}
+%\left< E_k(1/|\gamma_{\gamma,k}|) \right>_{\rm{ens}} = e^{\pm 2},
+%\eeq
+%where if $\left< E_k(t) \right>_{\rm{ens}}$ first reaches $e^2$, $\gamma_{\gamma,k}$ is positive, and if it first reaches $e^{-2}$, $\gamma_{\gamma,k}$ is negative.
+%Therefore, finding $\gamma_{\gamma,k}$ amounts to a root-finding problem, which is not trivial, but is much simpler than a nonlinear simulation. 
+%
+%We test both of these non-modal growth rates to see if either or both produce good approximations of $\gamma_{t,k}$, especially in comparison to $\gamma_{s,k}$. 
+%In Fig.~\ref{alpha1e-5_gamma_spec_compare}, we show the $\gamma_{\omega,k}$ and $\gamma_{\gamma,k}$ spectra for the 2D HW
+%model for $\alpha=10^{-5}$ along with the eigenmode and turbulent spectra ($\gamma_{s,k}$ and $\gamma_{t,k}$), which we already provided in Fig.~\ref{alpha1e-5_gamma_s_t}. We do the same for
+%$\alpha=1$ in Fig.~\ref{alpha1_gamma_spec_compare}. For the highly non-normal case ($\alpha = 10^{-5}$), $\gamma_{\omega,k}$ reproduces $\gamma_{t,k}$ in both magnitude and spectral shape. 
+%$\gamma_{\gamma,k}$ is not close in any respect to $\gamma_{t,k}$. On the other hand, for the nearly normal case ($\alpha=1$), $\gamma_{\omega,k}$ does not resemble $\gamma_{t,k}$. 
+%$\gamma_{\gamma,k}$ actually is fairly similar to $\gamma_{s,k}$, but with a slightly decreased amplitude, making it a closer match to $\gamma_{t,k}$, though it is still not similar for all $k$.
 
 \begin{figure}
 \centerline{\includegraphics[width=0.45\textwidth]{gamma_max_with_nm}}
-\caption{Comparison of the non-modal growth rates, $\gamma_{\omega,k}$ and $\gamma_{\gamma,k}$, to the eigenmode $\gamma_{s}$ and turbulent $\gamma_{t}$ growth rates as a function of $\alpha$
+\caption{Comparison of the non-modal growth rate $\gamma_{\rm{nm},k}$ to the eigenmode $\gamma_{s}$ and turbulent $\gamma_{t}$ growth rates as a function of $\alpha$
 for the 2D HW model. All growth rates are peaks in $k_x-k_y$ space.}
 \label{gamma_max_with_nm}
 \end{figure}
 
-We further test how well the maxima of the non-modal growth rates predict the maxima of the turbulent growth rates. We show the result in Fig.~\ref{gamma_max_with_nm}. For $\alpha \le 10^{-4}$,
-in which the system is fairly non-normal, $\gamma_{\omega,k}$ predicts $\gamma_{t,k}$ quite accurately. As the system becomes more normal, $\gamma_{t,k}$ and $\gamma_{\omega,k}$ diverge, with
-$\gamma_{t,k}$ taking on values between $\gamma_{s,k}$ and $\gamma_{\omega,k}$, but generally closer to $\gamma_{s,k}$ for $\alpha \gg 10^{-3}$. 
+The non-modal growth rate prediction agrees fairly well with the turbulent growth rate for highly non-normal 2D HW turbulence as seen in Fig.~\ref{gamma_max_with_nm}. For $\alpha \le 10^{-4}$,
+in which the system is fairly non-normal, $\gamma_{\rm{nm},k}$ predicts $\gamma_{t,k}$ quite accurately, especially compared to the eigenmode prediction. 
+As the system becomes more normal, $\gamma_{t,k}$ and $\gamma_{\rm{nm},k}$ diverge, with $\gamma_{t,k}$ taking on values between $\gamma_{s,k}$ and $\gamma_{\rm{nm},k}$, 
+but generally closer to $\gamma_{s,k}$ for $\alpha \gg 10^{-3}$. 
 This indicates that some assumption in our procedure doesn't work well for systems that are normal or nearly normal. Namely, our assumption
-of complete randomization by the nonlinearities breaks down. Apparently, the nonlinearities only partially randomize the turbulence. For the most part, the turbulence at a given $k$ consists
-primarily of the unstable eigenmode, while the stable eigenmode accounts for only a small amount of energy in the turbulence. Finally, $\gamma_{\gamma,k}$ is not useful in predicting $\gamma_{t,k}$.
-It is closest to $\gamma_{t,k}$ for $\alpha \ge 1$, however, it only provides a slight improvement over $\gamma_{s,k}$ in this range.
+of complete randomization by the nonlinearities breaks down. Apparently, the nonlinearities only partially randomize the turbulence in the weakly non-normal case. 
+For the most part, the turbulence at a given $k$ consists primarily of the unstable eigenmode, while the stable eigenmode accounts for only a small amount of energy in the turbulence.
 
 \begin{figure}
 \centerline{\includegraphics[width=0.4\textwidth]{gamma_max_vs_kz_with_nm}}
-\caption{Comparison of the non-modal growth rates, $\gamma_{\omega,k}$ and $\gamma_{\gamma,k}$, to the growth rates of the fastest growing eigenmode $\gamma_{s,k}$ 
-and the of the turbulence $\gamma_{t,k}$ as a function of $k_z$ for the 3D HW model with $\xi = 10^3$. The non-modal growth rates correctly predict the growth rate dominance of the $k_z=0$ mode
+\caption{Comparison of the non-modal growth rate $\gamma_{\rm{nm},k}$ to the growth rates of the fastest growing eigenmode $\gamma_{s,k}$ 
+and the of the turbulence $\gamma_{t,k}$ as a function of $k_z$ for the 3D HW model with $\xi = 10^3$. The non-modal growth rate correctly predict the growth rate dominance of the $k_z=0$ mode
 despite the $k_z=0$ eigenmode stability.}
 \label{gamma_max_vs_kz_with_nm}
 \end{figure}
 
 We do the same comparison for the 3D HW model as we did for the 2D HW model. However, there is one additional subtelty when considering the 3D model. In the 3D model, for $k_z=0$, the linear
-eigenmode frequency is zero ($\omega_{s,k_z=0} = 0$), so $\gamma_{\omega,k_z=0}$ is not well defined (see Eq.~\ref{gamma_omega_def}). 
-We could, in fact, make the argument that since $\omega_{s,k_z=0} = 0$, or by critical balance $\tau_{nl,k_z=0} \to \infty$, it would be proper to equate $\gamma_{\omega,k_z=0}$ with $\gamma_{s,k_z=0}$
+eigenmode frequency is zero ($\omega_{s,k_z=0} = 0$), so $\gamma_{\rm{nm},k_z=0}$ is not well defined (see Eq.~\ref{gamma_omega_def}). 
+We could, in fact, make the argument that since $\omega_{s,k_z=0} = 0$, or by critical balance $\tau_{nl,k_z=0} \to \infty$, it would be proper to equate $\gamma_{\rm{nm},k_z=0}$ with $\gamma_{s,k_z=0}$
 since all transients die away in the long time limit. Rather, we use $\omega_{s,k_z=0.02}$ -- where $k_z=0.02$ is the lowest finite value of $k_z$ available to our system -- in place of
-$\omega_{s,k_z=0}$ in the calculation of $\gamma_{\omega,k_z=0}$. We contend that the nonlinear instability, which most strongly couples $k_z=0$ and $k_z=0.02$ modes, has its time scale set
-by the drift waves, not the convective cells, making $1/\omega_{s,k_z=0.02}$ a good proxy for $\tau_{nl,k_z=0}$. One may recall that the drift waves are actually secondary, and therefore, they feed
-off of the $k_z=0$ density structures, so the appropriate scale length to use for $\omega_{s,k_z=0.02}$ is not given by $\kappa$, but by the scale length of the density structures. We don't deal
-with this complication and assume the scale length of the fluctuating density structures is the same as the background.
+$\omega_{s,k_z=0}$ in the calculation of $\gamma_{\rm{nm},k_z=0}$. We contend that the nonlinear instability, which most strongly couples $k_z=0$ and $k_z=0.02$ modes, has its time scale set
+by the drift waves, not the convective cells, making $1/\omega_{s,k_z=0.02}$ a good proxy for $\tau_{nl,k_z=0}$. 
+
+%One may recall that the drift waves are actually secondary, and therefore, they feed
+%off of the $k_z=0$ density structures, so the appropriate scale length to use for $\omega_{s,k_z=0.02}$ is not given by $\kappa$, but by the scale length of the density structures. We don't deal
+%with this complication and assume the scale length of the fluctuating density structures is the same as the background.
 
 \begin{figure}
 \centerline{\includegraphics[width=0.55\textwidth]{gamma_max_vs_xi}}
-\caption{Comparison of the maximum non-modal growth rates, $\gamma_{\omega,k}$ and $\gamma_{\gamma,k}$, to the growth rates of the fastest growing eigenmode $\gamma_{s,k}$ 
-and the of the turbulence $\gamma_{t,k}$ as a function of $\xi$ for the 3D HW model at {\bf a)} $k_z \rho_s = 0$ and {\bf b)} $k_z \rho_s \approx 0.02$. 
-As in the 2D model, $\gamma_{\omega,k}$ does }
+\caption{Comparison of the maximum non-modal growth rate $\gamma_{\rm{nm},k}$ to the growth rates of the fastest growing eigenmode $\gamma_{s,k}$ 
+and the of the turbulence $\gamma_{t,k}$ as a function of $\xi$ for the 3D HW model at {\bf a)} $k_z \rho_s = 0$ and {\bf b)} $k_z \rho_s \approx 0.02$. }
 \label{gamma_max_vs_xi}
 \end{figure}
 
-Despite these complications at $k_z=0$, our non-modal method of calculating $\gamma_{\omega,k}$ approximates $\gamma_{t,k}$ remarkably well as seen in Figs.~\ref{gamma_max_vs_kz_with_nm}
-and~\ref{gamma_max_vs_xi}.
-Most importantly, it correctly predicts that $\gamma_{\omega,k_z=0} > 0$ and $\gamma_{\omega,k_z=0} > \gamma_{\omega,k_z \ne 0}$ for $\xi \ge 10^{2}$. 
-Therefore, non-modal calculations explain why the 3D HW model is dominated by the nonlinear instability (for $\xi \ge 10^{2}$) rather than a linear drift wave instability. 
-Simply put, transient growth is strongest at $k_z=0$, so the nonlinear instability is energetically
-favored over the linear instability. Again, $\gamma_{\gamma,k}$ does not provide enough accuracy to warrant its use.
+Despite these complications at $k_z=0$, our non-modal method of calculating $\gamma_{\rm{nm},k}$ approximates $\gamma_{t,k}$ remarkably well as seen in Figs.~\ref{gamma_max_vs_kz_with_nm}
+and~\ref{gamma_max_vs_xi}. Most importantly, it correctly predicts that $\gamma_{\rm{nm},k_z=0} > 0$. 
+Therefore, non-modal calculations explain why the 3D HW model can be dominated by the nonlinear instability rather than a linear drift wave instability. 
+Simply put, the transient growth rate is by far the largest at $k_z=0$ for $\xi \gg 10^2$, so the nonlinear instability is energetically favored over the primary drift wave instability.
+For $\xi \le 10^2$, the $k_z=0$ nonlinear instability has comparable growth rate to the drift wave instability, so neither dominates.
 
 \section{Prediction of Control Parameter for Subcritical Turbulent Onset}
 \label{sec_subcrit_prediction}
@@ -598,11 +600,11 @@ and below which turbuelence never develops and the fluctuations decay away. This
 
 In this subcritical system, we predict the line in $\xi-\kappa$ parameter space that divides the space into an area that permits turbulent solutions and an area that does not. Note that we are
 not concerend here with amplitude threasholds. We simply want to know for given values of $\xi$ and $\kappa$ whether turbuelence can exist given a sufficiently large perturbation. Our method
-of prediction is to find the line in $\xi-\kappa$ space at which $\gamma_\omega = 0$, where $\gamma_\omega$ is maximized over $k_x$ and $k_y$. We plot this line in Fig.~\ref{subcrit_param_space}
+of prediction is to find the line in $\xi-\kappa$ space at which $\gamma_{\rm{nm}} = 0$, where $\gamma_{\rm{nm}}$ is maximized over $k_x$ and $k_y$. We plot this line in Fig.~\ref{subcrit_param_space}
 
 \begin{figure}
 \centerline{\includegraphics[width=0.4\textwidth]{subcrit_param_space}}
-\caption{The non-modal curve $\gamma_\omega(\kappa,\xi) = 0$, which defines our prediction of the transitional value of $\kappa(\xi)$ for the subcritical 3D HW model. The points represent the
+\caption{The non-modal curve $\gamma_{\rm{nm}}(\kappa,\xi) = 0$, which defines our prediction of the transitional value of $\kappa(\xi)$ for the subcritical 3D HW model. The points represent the
 transitional values of $\kappa(\xi)$ based on full nonlinear simulations.}
 \label{subcrit_param_space}
 \end{figure}
