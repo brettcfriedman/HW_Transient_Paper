@@ -377,23 +377,23 @@ It is therefore possible for $\gamma_{t,k} > \gamma_{s,k}$ in non-normal systems
 For the 2D HW model, we show
 $\gamma_{s,k}$ and $\gamma_{t,k}$ for two different values of $\alpha$. In Fig.~\ref{alpha1e-5_gamma_s_t}, we show these growth rate spectra for $\alpha = 10^{-5}$, for which the system is
 highly non-normal, and in Fig.~\ref{alpha1_gamma_s_t} for $\alpha = 1$, for which the system is closer to being normal (see the inset of Fig.~\ref{gamma_max_vs_alpha}). All calculations in this section use $\kappa=1$. 
-Note the different scales used in all of the figures. In the highly
-non-normal case, the turbulent growth rate is somewhat higher than the eigenmode growth rate for most values of $k_x,k_y$, and about 6 times higher where the spectrum peaks. For the more normal
+In the highly non-normal case, the turbulent growth rate is very similar to the eigenmode growth rate for most values of $k_x,k_y$, but about 6 times higher where the spectrum peaks. For the more normal
 case, in contrast, $\gamma_{t,k}$ is generally lower than $\gamma_{s,k}$, with the peak at nearly a factor of 2 less, with the peaks being at slightly different values of $k_y$.
 \begin{figure}
 \centerline{\includegraphics[width=0.52\textwidth]{alpha1e-5_gamma_s_t}}
-\caption{{\bf a)} The eigenmode growth rate spectrum $\gamma_{s,k}$ and {\bf b)} the turbulent growth rate spectrum $\gamma_{t,k}$ for $\alpha = 10^{-5}, \kappa=1$. Note the different scales.}
+\caption{{\bf a)} The eigenmode growth rate spectrum $\gamma_{s,k}$ and {\bf b)} the turbulent growth rate spectrum $\gamma_{t,k}$ for $\alpha = 10^{-5}, \kappa=1$.}
 \label{alpha1e-5_gamma_s_t}
 \end{figure}
 
-We show the peak values for $\gamma_{s,k}$ and $\gamma_{t,k}$ in Fig.~\ref{gamma_max_vs_alpha} as a function of $\alpha$. The peak values always occur in $k$-space
-at the lowest $k_x$ available to our system, corresponding to half of a period of a sine wave. The value of $k_y$ that gives the highest growth rate migrates upward as $\alpha$ increases,
-as is clear from Figs.~\ref{alpha1e-5_gamma_s_t} and~\ref{alpha1_gamma_s_t}. Furthermore, as expected, when $\alpha$ is small ($\lesssim 10^{-3}$), $\gamma_{t,k} > \gamma_{s,k}$, with
-$\gamma_{t,k} \gg \gamma_{s,k}$ as $\alpha \to 0$. Additionally, when $\alpha$ becomes larger and the system becomes more normal ($\gtrsim 10^{-1}$), $\gamma_{t,k} < \gamma_{s,k}$.
+Since the peak growth rates are the most important when considering whether a system can sustain turbulent, we show the peak values for $\gamma_{s,k}$ and $\gamma_{t,k}$ in Fig.~\ref{gamma_max_vs_alpha} as a function of $\alpha$. 
+The peak values always occur in $k$-space at the lowest $k_x$ available to our system, corresponding to half of a period of a sine wave. The value of $k_y$ that gives the highest growth rate migrates upward as $\alpha$ increases,
+as is clear from Figs.~\ref{alpha1e-5_gamma_s_t} and~\ref{alpha1_gamma_s_t}. Henceforth, we discuss only the peak growth rates.
 
-For both the normal and highly non-normal limits of the 2D HW model, $\gamma_{s,k}$ does a poor job of predicting $\gamma_{t,k}$ because $\gamma_{s,k}$ neglects the stable branch of the
-dispersion relation -- the damped eigenmode. Additionally, in the moderate normality region where $\gamma_{s,k}$ does match $\gamma_{t,k}$ well, it is misleading to think of the system as being composed of only the
-unstable eigenmode. The damped mode simply has both damping and transient growth effects depending on its relative magnitude at a particular time. These effects nearly cancel out on average when $\gamma_{t,k} \approx \gamma_{s,k}$.
+As expected, when $\alpha$ is small ($\lesssim 10^{-3}$), $\gamma_{t} > \gamma_{s}$, with
+$\gamma_{t} \gg \gamma_{s}$ as $\alpha \to 0$. Additionally, when $\alpha$ becomes larger and the system becomes more normal ($\gtrsim 10^{-1}$), $\gamma_{t} < \gamma_{s}$.
+For both the normal and highly non-normal limits of the 2D HW model, $\gamma_{s}$ does a poor job of predicting $\gamma_{t}$ because $\gamma_{s}$ neglects the stable branch of the
+dispersion relation -- the damped eigenmode. Additionally, in the moderate normality region where $\gamma_{s}$ does match $\gamma_{t}$ well, it is misleading to think of the system as being composed of only the
+unstable eigenmode. The damped mode simply has both damping and transient growth effects depending on its relative magnitude at a particular time. These effects nearly cancel out on average when $\gamma_{t} \approx \gamma_{s}$.
 
 \begin{figure}
 \centerline{\includegraphics[width=0.52\textwidth]{alpha1_gamma_s_t}}
@@ -402,7 +402,7 @@ unstable eigenmode. The damped mode simply has both damping and transient growth
 \end{figure}
 
 The importance of the stable eigenmode branch~\cite{baver2002} (or branches) has started to gain acceptance in the plasma community, although it has generally been used in normal
-or nearly normal systems to explain turbulent saturation~\cite{terry2006b,hatch2011,makwana2011} ($\gamma_{t,k} < \gamma_{s,k}$). 
+or nearly normal systems to explain turbulent saturation~\cite{terry2006b,hatch2011,makwana2011} ($\gamma_{t} < \gamma_{s}$). 
 The case of highly non-normal turbulence and the associated increased turbulent excitation hasn't been understood as well. 
 In fact, simulation and analysis of the 3D HW model (and extended models) is an area in which others have seen the effects of strong non-normal transient growth
 but have not connected them to the nonorthogonal eigenmode transient growth theory~\cite{biskamp1995,drake1995,scott2002,scott2005,umansky2009,friedman2012b}.
