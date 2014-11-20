@@ -108,7 +108,7 @@
 \title{A Procedure to Predict the Subcritical Turbulent Onset Criterion Applied to a Modified Hasegawa-Wakatani Model}
 
 \author{B. Friedman}
-\email{friedman@physics.ucla.edu}
+\email{friedman11@llnl.gov}
 
 \affiliation{Department of Physics and Astronomy, University of California, Los Angeles, California 90095-1547, USA}
 \affiliation{Lawrence Livermore National Laboratory, Livermore, California 94550, USA}
@@ -121,12 +121,14 @@
 
 
 \begin{abstract}
-Linear eigenmode analysis fails to account for turbulence in subcritical systems in many cases because such systems have non-normal linear operators, and thus
+Linear eigenmode analysis often fails to describe turbulence in model
+systems that have non-normal linear operators, and thus
 nonorthogonal eigenmodes, which can cause fluctuations to transiently grow faster than expected from eigenmode analysis. When combined with energetically conservative nonlinear mode mixing, 
 transient growth can lead to sustained turbulence even in the absence of eigenmode instability. 
 Since linear operators ultimately provide the turbulent fluctuations with energy, it is useful to define a growth rate that takes into account non-modal effects, allowing for
-prediction of energy injection and transport levels, and even turbulent onset in the subcritical regime. 
-We define such a non-modal growth rate by modelling the statistical effect that the nonlinearities have on cross-phases and amplitude ratios of the system state variables. 
+prediction of energy injection, transport levels, and possibly even turbulent onset in the subcritical regime. 
+We define such a non-modal growth rate using a relatively simple model
+of the statistical effect that the nonlinearities have on cross-phases and amplitude ratios of the system state variables. 
 In particular, we model the nonlinearities as delta-function-like, periodic forces that randomize the state variables once every eddy turnover time. Furthermore, we estimate the eddy turnover
 time to be the inverse of the least stable eigenmode frequency or growth rate, which allows for prediction without nonlinear numerical simulation. We test this procedure on the 2D and 3D Hasegawa-Wakatani model
 [A. Hasegawa and M. Wakatani, Phys. Rev. Lett. 50, 682 (1983)] as well as on a modified subcritical version of the 3D Hasegawa-Wakatani model and find that
@@ -141,7 +143,7 @@ The calculation of linear instabilities through normal mode analysis, which solv
 has successfully predicted the turbulent onset criterion for many plasma and fluid systems.
 Nevertheless, it is well-known in the hydrodynamics community that normal mode analysis has failed to predict turbulent onset in many experiments -- those in which the
 turbulence is called subcritical~\cite{drazin1981}. 
-In subcritical systems, turbulence develops even though all linear eigenvectors are stable such that infinitesimal perturbations on the laminar state cannot grow exponentially. 
+In subcritical systems, turbulence develops even though all linear eigenvectors are stable such that infinitesimal perturbations on the equilibrium state cannot grow exponentially. 
 Nevertheless, finite amplitude perturbations still excite turbulence through nonlinear instabilities.
 Subcritical turbulence is common in plasmas as well, and several instances have been studied in the literature~\cite{waltz1985,scott1990,nordman1993,biskamp1995,drake1995,itoh1996,camargo1998,krommes1999,camporeale2009,schekochihin2012,highcock2012}. 
 
@@ -150,12 +152,13 @@ in the early 1990s, several researchers attributed the failure of normal mode an
 dynamical systems~\cite{gustavsson1991,butler1992,trefethen1993,reddy1993,henningson1994,schmid2007}. A non-normal operator has 
 eigenvectors that are not orthogonal to one another. One consequence of eigenvector nonorthogonality is that even when all eigenvectors decay exponentially under linear evolution, 
 superpositions of eigenvectors can grow, albeit transiently.
-In other words, certain fluctuations of the laminar state can access free energy from background gradients even though normal mode fluctuations cannot.
+In other words, certain fluctuation structures can access free energy from background gradients even though normal mode fluctuations cannot.
 When combined with nonlinear effects, this allows for sustained subcritical turbulence by a bootstrapping process.
 Such behavior is obscured by traditional normal mode analysis, which only effectively describes the long time asymptotic behavior of fluctuations under  
 action of the linear operator. Transient growth, which can dominate turbulent evolution, must be found through non-modal calculations.
 
-Non-modal analysis generally employs tools such as pseudospectra and maximum growth curves, which have been used to successfully explain why turbulence is subcritical in various instances. 
+Non-modal analysis generally employs tools such as pseudospectra and maximum growth curves, which have been used to successfully explain
+why turbulence is subcritical in various instances~\cite{trefethen1993,camargo1998}. 
 However, they have not been used to predict onset criteria in subcritical systems (e.g. the transition Reynold's number in pipe flows).
 This paper outlines and illustrates a non-modal method to make quantitative predictions of turbulent properties including turbulent onset criteria. 
 Our approach is to define a non-modal growth rate that is analagous to an eigenmode growth rate, but which takes into account transient growth effects. 
@@ -165,7 +168,8 @@ nonlinearities randomize the complex ratios on a characteristic nonlinear time s
 We estimate the nonlinear time scale by a characteristic linear time scale, taking either the inverse linear eigenmode frequency or growth rate as the linear time scale.
 Between the nonlinear randomization, the system evolves linearly, and we use this evolution to calculate the non-modal growth rate. This non-modal growth rate takes the place of the eigenmode growth, which can be used
 to give energy injection rates, turbulent saturation levels, and the turbulent onset criteria.
-That is, we argue that a finite positive non-modal growth rate indicates that turbulence can exist, given, of course a sufficient perturbative kick.
+That is, we argue that a finite positive non-modal growth rate
+indicates that turbulence can exist given a sufficiently large perturbative kick.
 
 The paper is organized as follows: in Section~\ref{sec_hw_model}, we specify our illustrative model, the 2D and 3D Hasegawa-Wakatani model,
 that we use throughout the paper and describe its linear non-normal properties,  while in Section~\ref{sec_non_norm_turb}, we explore the effect of linear non-normality in the model on turbulence. 
@@ -186,18 +190,19 @@ The HW model consists of two equations for the density $n$ and the electrostatic
 \label{phi_eq}
 \pdiff{\gradperp^2 \phi}{t} = - {\mathbf v_E} \cdot \grad (\gradperp^2 \phi) + \xi \gradpar^2 (n - \phi) - D \gradperp^6 \phi
 \eeqar
-The normalizations are $\phi \to e \phi/T_e, n \to n/n_0, \grad \to \rho_s \grad , x,y,z \to x,y,z/\rho_s, t \to \omega_{ci} t $. Additionally,
-$\mathbf{v_E} = \mathbf{b} \times \grad \phi$, $\xi = 4 \pi \omega_{ce}/\nu_{ei}$, 
+The normalizations are $\phi \to e \phi/T_e, n \to n/n_0, \grad \to \rho_s \grad , x,y,z \to x,y,z/\rho_s, t \to \omega_{ci} t $, where $\rho_s$ is the ion sound gyroradius at the electron temperature and $\omega_{ci}$ is
+the ion cyclotron frequency. Additionally, $\mathbf{v_E} = \mathbf{b} \times \grad \phi$, where $\mathbf{b}$ is the magnetic field direction, $\xi = 4 \pi \omega_{ce}/\nu_{ei}$, where $\omega_{ce}$ is the electron cyclotron
+frequency and $\nu_{ei}$ is the electron-ion collision frequency,
 and $\kappa = \rho_s/L_n$, where $L_n$ is the density scale length. The terms $D \gradperp^4 n$ and $D \gradperp^6 \phi$ are artificial hyper-diffusion and hyper-viscosity used to dissipate
 energy on small scales. We set $D \to 10^{-5}$ except in Sec.~\ref{sec_subcrit_prediction} where we set it to $0.5$.
-We associate the direction along $\mathbf{B}$ as the parallel or $z$ direction. The direction perpendicular $\mathbf{B}$ that
+We associate the direction $\mathbf{b}$ as the $z$ direction. The direction perpendicular $\mathbf{b}$ that
 points opposite the density gradient is defined as the $x$ direction, and the $y$ direction is taken perpendicular to both of these.
 
 In the analysis and numerical simulations, which we perform with the BOUT++ code~\cite{dudson2009}, we use periodic boundary conditions in
 the $y$ and $z$ directions with zero-value boundaries in the $x$ direction. We use a domain size of $64 \rho_s \times 64 \rho_s \times 320 \rho_s$.
 For the 2D version of the model, we replace $-\xi \gradpar^2$ with a single parameter $\alpha$ (definied as $\alpha = 4 \pi k_z^2 \rho_s^2 \omega_{ce} /\nu_{ei})$, 
 which is commonly known as the adiabaticity parameter~\cite{camargo1995,camargo1998}. Additionally we use a domain size of $50 \rho_s \times 50 \rho_s$.
-In numerical simulations, the turbulence can laminarize due to the build-up of $k_y=0$ density and potential structures~\cite{biskamp1995}. To prevent this, we subtract out the $k_y=0$
+In numerical simulations, the turbulence can be suppressed due to the build-up of $k_y=0$ density and potential structures~\cite{biskamp1995}. To prevent this, we subtract out the $k_y=0$
 density and potential components, which is the equivalent of adding source terms to Eqs.~\ref{n_eq} and~\ref{phi_eq}~\cite{friedman2012b}.
 
 The degree of non-normality of the linear operator in the HW model is largely a function of the adiabaticity parameter~\cite{camargo1998}, or in the 3D case, of $\xi \gradpar^2$. 
@@ -289,7 +294,7 @@ $||e^{\mathbf{B}_{k,\alpha} t}||^2$ displays large non-exponential growth at ear
 \label{max_en_growth}
 \end{figure}
 
-Non-normality manifests itself in its eigenvectors -- non-normal matrices or operators have nonorthogonal linear eigenvectors. For the HW model, each Fourier matrix $\mathbf{B}_k$ has two eigenvectors associated
+Non-normality manifests itself in the eigenvectors -- non-normal matrices or operators have nonorthogonal linear eigenvectors. For the HW model, each Fourier matrix $\mathbf{B}_k$ has two eigenvectors associated
 with it. They are complex and take the form:
 
 \beq
@@ -354,14 +359,15 @@ the rate of energy removal (or deposition) from the nonlinear terms. Formally,
 \eeqar
 $\gamma_k$ vanishes, as indicated, for steady or quasi-steady state turbulence, meaning $\gamma_{l,k} = - \gamma_{nl,k}$.
 
-It is the linear rate of energy injection into the fluctuations $\gamma_{l,k}$ that we wish to use as the turbulent growth rate $\gamma_{t,k}$ because $\gamma_{l.k}$
-determines how fast and where in wavenumber space energy is injected into the turbulence.
+It is the linear rate of energy injection into the fluctuations
+$\gamma_{l,k}$ that we wish to use as the turbulent growth rate
+$\gamma_{t,k}$ because $\gamma_{l,k}$ determines how fast and where in wavenumber space energy is injected into the turbulence.
 $\gamma_{l,k}$, in other words, is the turbulence equivalent to the linear eigenmode growth rate $\gamma_{s,k}$~\cite{friedman2012b,terry2006b}. 
 That is, in a linear simulation run for a sufficiently long time where transients die away, the calculation of $\gamma_{l,k}$ from the simulated $n_k$ and $\phi_k$ gives exactly $\gamma_{s,k}$, which is generally
 calculated from the eigenvalue problem rather than a direct simulation.
 However, we always calculate $\gamma_{t,k}$ from steady state turbulent $n_k$ and $\phi_k$ fluctuations.
 
-The turbulent growth rate $\gamma_{t,k}$ is an informative quantity. 
+The turbulent growth rate $\gamma_{t,k}$ is a useful and informative quantity. 
 Note that in Eq.~\ref{Explicit_En_eqn} all of the linear terms on the right hand side of the equation are negative, except for the first term, which can have either sign. 
 This term is proportional to the cross-field particle flux $\Gamma_x = \left< v_{E,x} n \right> \sim -i k_y \phi_k n_k$, meaning that a positive $\gamma_{t,k}$ indicates an outward particle flux
 due to $k$ wavenumber flows. Particle transport, then, requires that $\gamma_{t,k} > 0$ for at least one value of $k$. Furthermore, since the nonlinearities are energetically conservative,
@@ -385,14 +391,15 @@ case, in contrast, $\gamma_{t,k}$ is generally lower than $\gamma_{s,k}$, with t
 \label{alpha1e-5_gamma_s_t}
 \end{figure}
 
-Since the peak growth rates are the most important when considering whether a system can sustain turbulent, we show the peak values for $\gamma_{s,k}$ and $\gamma_{t,k}$ in Fig.~\ref{gamma_max_vs_alpha} as a function of $\alpha$. 
+Since the peak growth rates are the most important when considering whether a system can sustain turbulence, we show the peak values for $\gamma_{s,k}$ and $\gamma_{t,k}$ in Fig.~\ref{gamma_max_vs_alpha} as a function of $\alpha$. 
 The peak values always occur in $k$-space at the lowest $k_x$ available to our system, corresponding to half of a period of a sine wave. The value of $k_y$ that gives the highest growth rate migrates upward as $\alpha$ increases,
 as is clear from Figs.~\ref{alpha1e-5_gamma_s_t} and~\ref{alpha1_gamma_s_t}. Henceforth, we discuss only the peak growth rates.
 
 As expected, when $\alpha$ is small ($\lesssim 10^{-3}$), $\gamma_{t} > \gamma_{s}$, with
 $\gamma_{t} \gg \gamma_{s}$ as $\alpha \to 0$. Additionally, when $\alpha$ becomes larger and the system becomes more normal ($\gtrsim 10^{-1}$), $\gamma_{t} < \gamma_{s}$.
 For both the normal and highly non-normal limits of the 2D HW model, $\gamma_{s}$ does a poor job of predicting $\gamma_{t}$ because $\gamma_{s}$ neglects the stable branch of the
-dispersion relation -- the damped eigenmode. Additionally, in the moderate normality region where $\gamma_{s}$ does match $\gamma_{t}$ well, it is misleading to think of the system as being composed of only the
+dispersion relation -- the damped eigenmode~\cite{makwana2011}. 
+Additionally, in the moderate normality region where $\gamma_{s}$ does match $\gamma_{t}$ well, it is misleading to think of the system as being composed of only the
 unstable eigenmode. The damped mode simply has both damping and transient growth effects depending on its relative magnitude at a particular time. These effects nearly cancel out on average when $\gamma_{t} \approx \gamma_{s}$.
 
 \begin{figure}
@@ -560,7 +567,9 @@ In general, this is not true for non-normal systems. In many non-normal systems,
 Subcritical systems fall into two categories: those that have stable eigenmodes for all values of the control parameter, and those that have unstable eigenmodes
 when the control parameter becomes large (or small) enough. We illustrate these two categories with a diagram in Fig.~\ref{subcritical_diagram}. 
 The upper curve represents the first kind of subcritical system in which no unstable eigenmodes exist for any value of the control parameter $R$. In this
-case, there is some transitional value of $R$, labeled $R_g$, below which turbulence cannot occur. When a perturbation with amplitude above the line occurs in the system due to external input or noise, 
+case, there is some transitional value of $R$, labeled $R_g$, below
+which turbulence cannot occur. When a perturbation with amplitude
+($A$) above the line occurs in the system due to external input or noise, 
 turbulence will be excited. Perturbations with amplitude below the line will decay away. The higher the value of $R$, the smaller the perturbation needs to be to excite turbulence.
 Experimental evidence and theoretical arguments show this curve should have a $(R-R_g)^{-\lambda}$ dependence (for asymptotically large $R$), with $\lambda \sim 1$~\cite{waleffe1995b,grossmann2000,hof2003}.
 A paradigmatic example of this kind of system is Hagen-Poisuille pipe flow -- flow in a cylindrical pipe with a parabolic flow profile -- for which $R_g \approx 2000$.
@@ -588,11 +597,11 @@ instability for $R_g < R < R_c$.}
 \label{subcritical_diagram}
 \end{figure}
 
-We show that the system is subcritical in Fig.~\ref{crit_amp_dependence}. In Fig.~\ref{crit_amp_dependence} a), we plot the energy versus time for fluctuations that are initialized with the same functional form, but with
+We show that the modifed 3D HW system is subcritical in Fig.~\ref{crit_amp_dependence}. In Fig.~\ref{crit_amp_dependence} a), we plot the energy versus time for fluctuations that are initialized with the same functional form, but with
 different amplitudes.
 The fluctuations initialized with high enough amplitude lead to turbulence. 
 Otherwise, the fluctuations grow transiently, but do not reach high enough amplitude for the nonlinearities to bootstrap the process, so they decay away. 
-This finite amplitude turbulence threashold, as described above, is a key indicator of subcritical turbulence.
+This finite amplitude turbulence threshold, as described above, is a key indicator of subcritical turbulence.
 
 In Fig.~\ref{crit_amp_dependence} b), we show the amplitude threashold curve -- like that of Fig.~\ref{subcritical_diagram}. Each point represents the minimum amplitude that is needed for the simulation to eventually become
 turbulent. We fit the points to a function of the form $A = a (\kappa - \kappa_g)^{- \lambda}$, 
