@@ -105,7 +105,7 @@
 
 \begin{document}
 
-\title{Non-Modal Predictions of Turbulent Properties Applied to the Hasegawa-Wakatani Model}
+\title{A Non-Modal Analytical Procedure to Predict Turbulent Properties Applied to the Hasegawa-Wakatani Model}
 
 \author{B. Friedman}
 \email{friedman11@llnl.gov}
@@ -130,9 +130,9 @@ prediction of energy injection, transport levels, and possibly even turbulent on
 We define such a non-modal growth rate using a relatively simple model
 of the statistical effect that the nonlinearities have on cross-phases and amplitude ratios of the system state variables. 
 In particular, we model the nonlinearities as delta-function-like, periodic forces that randomize the state variables once every eddy turnover time. Furthermore, we estimate the eddy turnover
-time to be the inverse of the least stable eigenmode frequency or growth rate, which allows for prediction without nonlinear numerical simulation. We test this procedure on the 2D and 3D Hasegawa-Wakatani model
-[A. Hasegawa and M. Wakatani, Phys. Rev. Lett. 50, 682 (1983)] as well as on a modified subcritical version of the 3D Hasegawa-Wakatani model and find that
-the non-modal growth rate is a good predictor of energy injection rates in some regimes, though not yet in the subcritical regime.
+time to be the inverse of the least stable eigenmode frequency or growth rate, which allows for prediction without nonlinear numerical simulation. 
+We test this procedure on the 2D and 3D Hasegawa-Wakatani model [A. Hasegawa and M. Wakatani, Phys. Rev. Lett. 50, 682 (1983)] and find that
+the non-modal growth rate is a good predictor of energy injection rates, especially in the strongly non-normal, fully-developed turbulence regime.
 \end{abstract}
 
 \maketitle
@@ -140,7 +140,7 @@ the non-modal growth rate is a good predictor of energy injection rates in some 
 \section{Introduction}
 
 The calculation of linear instabilities through normal mode analysis, which solves for the eigenvalues and eigenvectors of a linearized dynamical system,
-has successfully predicted the turbulent onset criterion for many plasma and fluid systems.
+has successfully been used to predict turbulent properties such as turbulent onset and levels of transport for many plasma and fluid systems.
 Nevertheless, it is well-known in the hydrodynamics community that normal mode analysis has failed to predict turbulent onset in many experiments -- those in which the
 turbulence is called subcritical~\cite{drazin1981}. 
 In subcritical systems, turbulence develops even though all linear eigenvectors are stable such that infinitesimal perturbations on the equilibrium state cannot grow exponentially. 
@@ -153,28 +153,30 @@ dynamical systems~\cite{gustavsson1991,butler1992,trefethen1993,reddy1993,hennin
 eigenvectors that are not orthogonal to one another. One consequence of eigenvector nonorthogonality is that even when all eigenvectors decay exponentially under linear evolution, 
 superpositions of eigenvectors can grow, albeit transiently.
 In other words, certain fluctuation structures can access free energy from background gradients even though normal mode fluctuations cannot.
-When combined with nonlinear effects, this allows for sustained subcritical turbulence by a bootstrapping process.
+
+Moreover, even if normal mode fluctuations are unstable, they may not be as unstable as certain non-normal ones, which can produce turbulence with properties that are not predictable
+from normal mode analysis.
+When combined with nonlinear effects, non-modal fluctuations can sustain themsevles and have a permanent signature on turbulence.
 Such behavior is obscured by traditional normal mode analysis, which only effectively describes the long time asymptotic behavior of fluctuations under  
 action of the linear operator. Transient growth, which can dominate turbulent evolution, must be found through non-modal calculations.
 
 Non-modal analysis generally employs tools such as pseudospectra and maximum growth curves, which have been used to successfully explain
-why turbulence is subcritical in various instances~\cite{trefethen1993,camargo1998}. 
-However, they have not been used to predict onset criteria in subcritical systems (e.g. the transition Reynold's number in pipe flows).
-This paper outlines and illustrates a non-modal method to make quantitative predictions of turbulent properties including turbulent onset criteria. 
+why turbulence is subcritical or driven by nonlinear instability in various instances~\cite{trefethen1993,camargo1998}. 
+However, they have not been used to make quantitative predictions of turbulent transport levels or onset criteria in subcritical systems (e.g. the transition Reynold's number in pipe flows).
+This paper outlines and illustrates a non-modal method to make quantitative predictions of turbulent properties. 
 Our approach is to define a non-modal growth rate that is analogous to an eigenmode growth rate, but which takes into account transient growth effects. 
 
 To accomplish this, we model the effect that the nonlinearities have on the complex ratio of the state variables. Our model is one in which the 
 nonlinearities randomize the complex ratios on a characteristic nonlinear time scale.
 We estimate the nonlinear time scale by a characteristic linear time scale, taking either the inverse linear eigenmode frequency or growth rate as the linear time scale.
-Between the nonlinear randomization, the system evolves linearly, and we use this evolution to calculate the non-modal growth rate. This non-modal growth rate takes the place of the eigenmode growth, which can be used
+Between the nonlinear randomization, the system evolves linearly, and we use this evolution to calculate the non-modal growth rate. 
+This non-modal growth rate takes the place of the eigenmode growth, which can be used
 to give energy injection rates, turbulent saturation levels, and the turbulent onset criteria.
-That is, we argue that a finite positive non-modal growth rate
-indicates that turbulence can exist given a sufficiently large perturbative kick.
 
 The paper is organized as follows: in Section~\ref{sec_hw_model}, we specify our illustrative model, the 2D and 3D Hasegawa-Wakatani model,
 that we use throughout the paper and describe its linear non-normal properties,  while in Section~\ref{sec_non_norm_turb}, we explore the effect of linear non-normality in the model on turbulence. 
-In Section~\ref{sec_nm_procedure}, we cover the details of our procedure to calculate the non-modal growth rate and compare show it to growth rates derived directly from nonlinear numerical simulations. 
-Finally, in Section~\ref{sec_subcrit_prediction}, we modify the 3D Hasegawa-Wakatani model to make it subcritical and show to what degree our non-modal technique predicts the critical gradient for the onset of turbulence.
+In Section~\ref{sec_nm_procedure}, we cover the details of our procedure to calculate the non-modal growth rate and compare it to growth rates derived directly from nonlinear numerical simulations. 
+Finally, in the Appendix, we explore the possibility of predicting the critical gradient for turbulent onset with a modified subcritical 3D Hasegawa-Wakatani model.
 
 \section{Non-Normality of the Hasegawa-Wakatani Model} 
 \label{sec_hw_model}
@@ -194,7 +196,7 @@ The normalizations are $\phi \to e \phi/T_e, n \to n/n_0, \grad \to \rho_s \grad
 the ion cyclotron frequency. Additionally, $\mathbf{v_E} = \mathbf{b} \times \grad \phi$, where $\mathbf{b}$ is the magnetic field direction, $\xi = 4 \pi \omega_{ce}/\nu_{ei}$, where $\omega_{ce}$ is the electron cyclotron
 frequency and $\nu_{ei}$ is the electron-ion collision frequency,
 and $\kappa = \rho_s/L_n$, where $L_n$ is the density scale length. The terms $D \gradperp^4 n$ and $D \gradperp^6 \phi$ are artificial hyper-diffusion and hyper-viscosity used to dissipate
-energy on small scales. We set $D \to 10^{-5}$ except in Sec.~\ref{sec_subcrit_prediction} where we set it to $0.5$.
+energy on small scales. We set $D \to 10^{-5}$.
 We associate the direction $\mathbf{b}$ as the $z$ direction. The direction perpendicular $\mathbf{b}$ that
 points opposite the density gradient is defined as the $x$ direction, and the $y$ direction is taken perpendicular to both of these.
 
@@ -576,8 +578,28 @@ and the turbulence $\gamma_{t,k}$ as a function of $\xi$ for the 3D HW model at 
 \label{gamma_max_vs_xi}
 \end{figure}
 
-\section{Prediction of Control Parameter for Subcritical Turbulent Onset}
-\label{sec_subcrit_prediction}
+
+\section{Conclusion}
+
+When the nonlinear terms in the model equations are energetically conservative, as they are in the HW model, 
+the linear terms linear terms control the energy injection into the turbulent fluctuations.
+This property makes the turbulent growth rate, which is defined in terms of only the linear terms in the energetic model equations, a simple yet vital piece of information
+in understanding the nature of the system. When the system is non-normal, estimating the growth rate without nonlinear simulations almost surely requires non-modal techniques.
+
+Our method for analytically estimating this growth rate involves using a type of closure, which means modeling the effect that the nonlinearities have
+on the time-averaged complex ratio of the Fourier-decomposed state variables. 
+We present one specific phenomenological closure, in which the nonlinearities instantaneously randomize the state variables once every eddy turnover time, between
+which, the linear terms deterministically evolve them. We then estimate the eddy turnover time as the inverse linear eigenmode frequency or growth rate.
+
+While our nonlinear closure model is successful in some instances, such as the highly non-normal limit in the 2D HW model and in the 3D HW model when the gradient scale length factor $\kappa$ is large,
+it is relatively unsuccessful in others. This can be seen in the appendix, where we test the procedure to make an accurate prediction of the minimum value of $\kappa$ for which a subcritical version
+of the HW model will sustain turbulence. In that case, our method fails because our closure, which assumes a state of fully-developed turbulence with a finite decorrelation time and a critically
+balanced turbulent mechanism, breaks down.
+Perhaps in the future, different closure techniques will allow for better approximation of the turbulent growth rate in different regimes.
+
+
+\appendix
+\section{Subcritical Onset Prediction}
 
 In both hydrodynamic and plasma systems, it is important to be able to predict for a given set of parameters whether the system will be turbulent or not.
 Ideally, one would like to find the point, line, or manifold in parameter space that divides turbulent and laminar solutions.
@@ -666,28 +688,310 @@ And they do provide a prediction to the transition density gradient $\kappa_g$ i
 So, there is some value in the non-modal predictions, especially in light of the fact that it took over $10^5$ computer hours to calculate the $\kappa_g$ line using DNS and only seconds using the non-modal procedure.
 Furthermore, it is likely that more sophisticated models for the nonlinearities will improve the predictions in the future.
 
-\section{Conclusion}
-
-When the nonlinear terms in the model equations are energetically conservative, as they are in the HW model, the linear terms must on average inject energy into at least one wavenumber to sustain turbulent fluctuations.
-This is manifest in the positivity of the maximum turbulent growth rate, which is defined in terms of only the linear terms in the energetic model equations. Thus, an estimation of the turbulent growth rate provides vital
-information into the nature of the system. Furthermore, such an estimate almost surely requires non-modal techniques when the system is non-normal. 
-
-Our method for analytically estimating this growth rate involves using a type of closure, which means modeling the effect that the nonlinearities have
-on the time-averaged complex ratio of the Fourier-decomposed state variables. 
-We present one specific phenomenological closure, in which the nonlinearities instantaneously randomize the state variables once every eddy turnover time, between
-which, the linear terms deterministically evolve them. We then estimate the eddy turnover time as the inverse linear eigenmode frequency or growth rate.
-
-While our nonlinear closure model is successful in some instances, such as the highly non-normal limit in the 2D HW model and in the 3D HW model when the gradient scale length factor $\kappa$ is large, it is relatively unsuccessful
-in others, especially when the system is not highly non-normal. This prevents an accurate prediction of the transitional value $\kappa_g$ that marks where the system first becomes turbulent.
-Perhaps in the future, more advanced closure techniques will allow for better approximation of the turbulent growth rate.
 
 \begin{acknowledgments}
+This work was performed under the auspices of the U.S. Department of Energy by Lawrence Livermore National Laboratory under Contract DE-AC52-07NA27344.
 This work was supported by the National Science Foundation (Grant PHY-1202007)
 \end{acknowledgments}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\bibliographystyle{phaip}
-\bibliography{refs}
+%\bibliography{refs}
+
+
+\begin{thebibliography}{38}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname bibnamefont\endcsname\relax
+  \def\bibnamefont#1{#1}\fi
+\expandafter\ifx\csname bibfnamefont\endcsname\relax
+  \def\bibfnamefont#1{#1}\fi
+\expandafter\ifx\csname citenamefont\endcsname\relax
+  \def\citenamefont#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{\citenamefont{Drazin and Reid}(1981)}]{drazin1981}
+\bibinfo{author}{\bibfnamefont{P.~G.} \bibnamefont{Drazin}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{W.~H.} \bibnamefont{Reid}},
+  \emph{\bibinfo{title}{Hydrodynamic Stability}} (\bibinfo{publisher}{Cambridge
+  University Press}, \bibinfo{year}{1981}).
+
+\bibitem[{\citenamefont{Waltz}(1985)}]{waltz1985}
+\bibinfo{author}{\bibfnamefont{R.~E.} \bibnamefont{Waltz}},
+  \bibinfo{journal}{Phys. Rev. Lett.} \textbf{\bibinfo{volume}{55}},
+  \bibinfo{pages}{1098} (\bibinfo{year}{1985}).
+
+\bibitem[{\citenamefont{Scott}(1990)}]{scott1990}
+\bibinfo{author}{\bibfnamefont{B.~D.} \bibnamefont{Scott}},
+  \bibinfo{journal}{Phys. Rev. Lett.} \textbf{\bibinfo{volume}{65}},
+  \bibinfo{pages}{3289} (\bibinfo{year}{1990}).
+
+\bibitem[{\citenamefont{Nordman et~al.}(1993)\citenamefont{Nordman, Pavlenko,
+  and Weiland}}]{nordman1993}
+\bibinfo{author}{\bibfnamefont{H.}~\bibnamefont{Nordman}},
+  \bibinfo{author}{\bibfnamefont{V.~P.} \bibnamefont{Pavlenko}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{J.}~\bibnamefont{Weiland}},
+  \bibinfo{journal}{Phys. Fluids B} \textbf{\bibinfo{volume}{5}},
+  \bibinfo{pages}{402} (\bibinfo{year}{1993}).
+
+\bibitem[{\citenamefont{Biskamp and Zeiler}(1995)}]{biskamp1995}
+\bibinfo{author}{\bibfnamefont{D.}~\bibnamefont{Biskamp}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Zeiler}},
+  \bibinfo{journal}{Phys. Rev. Lett.} \textbf{\bibinfo{volume}{74}},
+  \bibinfo{pages}{706} (\bibinfo{year}{1995}).
+
+\bibitem[{\citenamefont{Drake et~al.}(1995)\citenamefont{Drake, Zeiler, and
+  Biskamp}}]{drake1995}
+\bibinfo{author}{\bibfnamefont{J.~F.} \bibnamefont{Drake}},
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Zeiler}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{D.}~\bibnamefont{Biskamp}},
+  \bibinfo{journal}{Phys. Rev. Lett.} \textbf{\bibinfo{volume}{75}},
+  \bibinfo{pages}{4222} (\bibinfo{year}{1995}).
+
+\bibitem[{\citenamefont{Itoh et~al.}(1996)\citenamefont{Itoh, Itoh, Yagi, and
+  Fukuyama}}]{itoh1996}
+\bibinfo{author}{\bibfnamefont{K.}~\bibnamefont{Itoh}},
+  \bibinfo{author}{\bibfnamefont{S.~I.} \bibnamefont{Itoh}},
+  \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Yagi}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Fukuyama}},
+  \bibinfo{journal}{Journal of the Physical Society of Japan}
+  \textbf{\bibinfo{volume}{65}}, \bibinfo{pages}{2749} (\bibinfo{year}{1996}).
+
+\bibitem[{\citenamefont{Camargo et~al.}(1998)\citenamefont{Camargo, Tippett,
+  and Caldas}}]{camargo1998}
+\bibinfo{author}{\bibfnamefont{S.~J.} \bibnamefont{Camargo}},
+  \bibinfo{author}{\bibfnamefont{M.~K.} \bibnamefont{Tippett}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{I.~L.}
+  \bibnamefont{Caldas}}, \bibinfo{journal}{Phys. Rev. E}
+  \textbf{\bibinfo{volume}{58}}, \bibinfo{pages}{3693} (\bibinfo{year}{1998}).
+
+\bibitem[{\citenamefont{Krommes}(1999)}]{krommes1999}
+\bibinfo{author}{\bibfnamefont{J.~A.} \bibnamefont{Krommes}},
+  \bibinfo{journal}{Plasma Phys. Control. Fusion}
+  \textbf{\bibinfo{volume}{41}}, \bibinfo{pages}{A641} (\bibinfo{year}{1999}).
+
+\bibitem[{\citenamefont{Camporeale et~al.}(2009)\citenamefont{Camporeale,
+  Burgess, and Passot}}]{camporeale2009}
+\bibinfo{author}{\bibfnamefont{E.}~\bibnamefont{Camporeale}},
+  \bibinfo{author}{\bibfnamefont{D.}~\bibnamefont{Burgess}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{T.}~\bibnamefont{Passot}},
+  \bibinfo{journal}{Phys. Plasmas} \textbf{\bibinfo{volume}{16}},
+  \bibinfo{pages}{030703} (\bibinfo{year}{2009}).
+
+\bibitem[{\citenamefont{Schekochihin et~al.}(2012)\citenamefont{Schekochihin,
+  Highcock, and Cowley}}]{schekochihin2012}
+\bibinfo{author}{\bibfnamefont{A.~A.} \bibnamefont{Schekochihin}},
+  \bibinfo{author}{\bibfnamefont{E.~G.} \bibnamefont{Highcock}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{S.~C.}
+  \bibnamefont{Cowley}}, \bibinfo{journal}{Plasma Phys. Control. Fusion}
+  \textbf{\bibinfo{volume}{54}}, \bibinfo{pages}{055011}
+  (\bibinfo{year}{2012}).
+
+\bibitem[{\citenamefont{Highcock et~al.}(2012)\citenamefont{Highcock,
+  Schekochihin, Cowley, Barnes, Parra, Roach, and Dorland}}]{highcock2012}
+\bibinfo{author}{\bibfnamefont{E.~G.} \bibnamefont{Highcock}},
+  \bibinfo{author}{\bibfnamefont{A.~A.} \bibnamefont{Schekochihin}},
+  \bibinfo{author}{\bibfnamefont{S.~C.} \bibnamefont{Cowley}},
+  \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Barnes}},
+  \bibinfo{author}{\bibfnamefont{F.~I.} \bibnamefont{Parra}},
+  \bibinfo{author}{\bibfnamefont{C.~M.} \bibnamefont{Roach}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{W.}~\bibnamefont{Dorland}},
+  \bibinfo{journal}{Phys. Rev. Lett.} \textbf{\bibinfo{volume}{109}},
+  \bibinfo{pages}{265001} (\bibinfo{year}{2012}).
+
+\bibitem[{\citenamefont{Gustavsson}(1991)}]{gustavsson1991}
+\bibinfo{author}{\bibfnamefont{L.~H.} \bibnamefont{Gustavsson}},
+  \bibinfo{journal}{J. Fluid Mech} \textbf{\bibinfo{volume}{224}},
+  \bibinfo{pages}{221} (\bibinfo{year}{1991}).
+
+\bibitem[{\citenamefont{Butler and Farrell}(1992)}]{butler1992}
+\bibinfo{author}{\bibfnamefont{K.~M.} \bibnamefont{Butler}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{B.~F.} \bibnamefont{Farrell}},
+  \bibinfo{journal}{Phys. Fluids A} \textbf{\bibinfo{volume}{4}},
+  \bibinfo{pages}{1637} (\bibinfo{year}{1992}).
+
+\bibitem[{\citenamefont{Trefethen et~al.}(1993)\citenamefont{Trefethen,
+  Trefethen, Reddy, and Driscoll}}]{trefethen1993}
+\bibinfo{author}{\bibfnamefont{L.~N.} \bibnamefont{Trefethen}},
+  \bibinfo{author}{\bibfnamefont{A.~E.} \bibnamefont{Trefethen}},
+  \bibinfo{author}{\bibfnamefont{S.~C.} \bibnamefont{Reddy}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{T.~A.} \bibnamefont{Driscoll}},
+  \bibinfo{journal}{Science} \textbf{\bibinfo{volume}{261}},
+  \bibinfo{pages}{578} (\bibinfo{year}{1993}).
+
+\bibitem[{\citenamefont{Reddy et~al.}(1993)\citenamefont{Reddy, Schmid, and
+  Henningson}}]{reddy1993}
+\bibinfo{author}{\bibfnamefont{S.~C.} \bibnamefont{Reddy}},
+  \bibinfo{author}{\bibfnamefont{P.~J.} \bibnamefont{Schmid}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{D.~S.}
+  \bibnamefont{Henningson}}, \bibinfo{journal}{SIAM J. Appl. Math.}
+  \textbf{\bibinfo{volume}{53}}, \bibinfo{pages}{15} (\bibinfo{year}{1993}).
+
+\bibitem[{\citenamefont{Henningson and Reddy}(1994)}]{henningson1994}
+\bibinfo{author}{\bibfnamefont{D.~S.} \bibnamefont{Henningson}}
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{S.~C.} \bibnamefont{Reddy}},
+  \bibinfo{journal}{Phys. Fluids} \textbf{\bibinfo{volume}{6}},
+  \bibinfo{pages}{1396} (\bibinfo{year}{1994}).
+
+\bibitem[{\citenamefont{Schmid}(2007)}]{schmid2007}
+\bibinfo{author}{\bibfnamefont{P.~J.} \bibnamefont{Schmid}},
+  \bibinfo{journal}{Annu. Rev. Fluid Mech.} \textbf{\bibinfo{volume}{39}},
+  \bibinfo{pages}{129} (\bibinfo{year}{2007}).
+
+\bibitem[{\citenamefont{Hasegawa and Wakatani}(1983)}]{hasegawa1983}
+\bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Hasegawa}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Wakatani}},
+  \bibinfo{journal}{Phys. Rev. Lett.} \textbf{\bibinfo{volume}{50}},
+  \bibinfo{pages}{682} (\bibinfo{year}{1983}).
+
+\bibitem[{\citenamefont{Dudson et~al.}(2009)\citenamefont{Dudson, Umansky, Xu,
+  Snyder, and Wilson}}]{dudson2009}
+\bibinfo{author}{\bibfnamefont{B.~D.} \bibnamefont{Dudson}},
+  \bibinfo{author}{\bibfnamefont{M.~V.} \bibnamefont{Umansky}},
+  \bibinfo{author}{\bibfnamefont{X.~Q.} \bibnamefont{Xu}},
+  \bibinfo{author}{\bibfnamefont{P.~B.} \bibnamefont{Snyder}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{H.~R.}
+  \bibnamefont{Wilson}}, \bibinfo{journal}{Computer Physics Communications} pp.
+  \bibinfo{pages}{1467--1480} (\bibinfo{year}{2009}).
+
+\bibitem[{\citenamefont{Camargo et~al.}(1995)\citenamefont{Camargo, Biskamp,
+  and Scott}}]{camargo1995}
+\bibinfo{author}{\bibfnamefont{S.~J.} \bibnamefont{Camargo}},
+  \bibinfo{author}{\bibfnamefont{D.}~\bibnamefont{Biskamp}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{B.~D.} \bibnamefont{Scott}},
+  \bibinfo{journal}{Phys. Plasmas} \textbf{\bibinfo{volume}{2}},
+  \bibinfo{pages}{48} (\bibinfo{year}{1995}).
+
+\bibitem[{\citenamefont{Friedman et~al.}(2012)\citenamefont{Friedman, Carter,
+  Umansky, Schaffner, and Dudson}}]{friedman2012b}
+\bibinfo{author}{\bibfnamefont{B.}~\bibnamefont{Friedman}},
+  \bibinfo{author}{\bibfnamefont{T.~A.} \bibnamefont{Carter}},
+  \bibinfo{author}{\bibfnamefont{M.~V.} \bibnamefont{Umansky}},
+  \bibinfo{author}{\bibfnamefont{D.}~\bibnamefont{Schaffner}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{B.}~\bibnamefont{Dudson}},
+  \bibinfo{journal}{Phys. Plasmas} \textbf{\bibinfo{volume}{19}},
+  \bibinfo{pages}{102307} (\bibinfo{year}{2012}).
+
+\bibitem[{\citenamefont{Camporeale et~al.}(2010)\citenamefont{Camporeale,
+  Burgess, and Passot}}]{camporeale2010}
+\bibinfo{author}{\bibfnamefont{E.}~\bibnamefont{Camporeale}},
+  \bibinfo{author}{\bibfnamefont{D.}~\bibnamefont{Burgess}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{T.}~\bibnamefont{Passot}},
+  \bibinfo{journal}{The Astrophysical Journal} \textbf{\bibinfo{volume}{715}},
+  \bibinfo{pages}{260} (\bibinfo{year}{2010}).
+
+\bibitem[{\citenamefont{Trefethen and Embree}(2005)}]{trefethen2005}
+\bibinfo{author}{\bibfnamefont{L.~N.} \bibnamefont{Trefethen}}
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Embree}},
+  \emph{\bibinfo{title}{Spectra and Pseudospectra: The Behavior of Nonnormal
+  Matrices and Operators}} (\bibinfo{publisher}{Princeton Univ. Press},
+  \bibinfo{year}{2005}).
+
+\bibitem[{\citenamefont{Henrici}(1962)}]{henrici1962}
+\bibinfo{author}{\bibfnamefont{P.}~\bibnamefont{Henrici}},
+  \bibinfo{journal}{Numer. Math} \textbf{\bibinfo{volume}{4}},
+  \bibinfo{pages}{24} (\bibinfo{year}{1962}).
+
+\bibitem[{\citenamefont{Friedman et~al.}(2013)\citenamefont{Friedman, Carter,
+  Umansky, Schaffner, and Joseph}}]{friedman2013}
+\bibinfo{author}{\bibfnamefont{B.}~\bibnamefont{Friedman}},
+  \bibinfo{author}{\bibfnamefont{T.~A.} \bibnamefont{Carter}},
+  \bibinfo{author}{\bibfnamefont{M.~V.} \bibnamefont{Umansky}},
+  \bibinfo{author}{\bibfnamefont{D.}~\bibnamefont{Schaffner}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{I.}~\bibnamefont{Joseph}},
+  \bibinfo{journal}{Phys. Plasmas} \textbf{\bibinfo{volume}{20}},
+  \bibinfo{pages}{055704} (\bibinfo{year}{2013}).
+
+\bibitem[{\citenamefont{Terry et~al.}(2006)\citenamefont{Terry, Baver, and
+  Gupta}}]{terry2006b}
+\bibinfo{author}{\bibfnamefont{P.~W.} \bibnamefont{Terry}},
+  \bibinfo{author}{\bibfnamefont{D.~A.} \bibnamefont{Baver}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{S.}~\bibnamefont{Gupta}},
+  \bibinfo{journal}{Phys. Plasmas} \textbf{\bibinfo{volume}{13}},
+  \bibinfo{pages}{022307} (\bibinfo{year}{2006}).
+
+\bibitem[{\citenamefont{Makwana et~al.}(2011)\citenamefont{Makwana, Terry, Kim,
+  and Hatch}}]{makwana2011}
+\bibinfo{author}{\bibfnamefont{K.~D.} \bibnamefont{Makwana}},
+  \bibinfo{author}{\bibfnamefont{P.~W.} \bibnamefont{Terry}},
+  \bibinfo{author}{\bibfnamefont{J.~H.} \bibnamefont{Kim}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{D.~R.} \bibnamefont{Hatch}},
+  \bibinfo{journal}{Phys. Plasmas} \textbf{\bibinfo{volume}{18}},
+  \bibinfo{pages}{012302} (\bibinfo{year}{2011}).
+
+\bibitem[{\citenamefont{Baver et~al.}(2002)\citenamefont{Baver, Terry, Gatto,
+  and Fernandez}}]{baver2002}
+\bibinfo{author}{\bibfnamefont{D.~A.} \bibnamefont{Baver}},
+  \bibinfo{author}{\bibfnamefont{P.~W.} \bibnamefont{Terry}},
+  \bibinfo{author}{\bibfnamefont{R.}~\bibnamefont{Gatto}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{E.}~\bibnamefont{Fernandez}},
+  \bibinfo{journal}{Phys. Plasmas} \textbf{\bibinfo{volume}{9}},
+  \bibinfo{pages}{3318} (\bibinfo{year}{2002}).
+
+\bibitem[{\citenamefont{Hatch et~al.}(2011)\citenamefont{Hatch, Terry, Jenko,
+  Merz, and Nevins}}]{hatch2011}
+\bibinfo{author}{\bibfnamefont{D.~R.} \bibnamefont{Hatch}},
+  \bibinfo{author}{\bibfnamefont{P.~W.} \bibnamefont{Terry}},
+  \bibinfo{author}{\bibfnamefont{F.}~\bibnamefont{Jenko}},
+  \bibinfo{author}{\bibfnamefont{F.}~\bibnamefont{Merz}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{W.~M.} \bibnamefont{Nevins}},
+  \bibinfo{journal}{Phys. Rev. Lett.} \textbf{\bibinfo{volume}{106}},
+  \bibinfo{pages}{115003} (\bibinfo{year}{2011}).
+
+\bibitem[{\citenamefont{Scott}(2002)}]{scott2002}
+\bibinfo{author}{\bibfnamefont{B.~D.} \bibnamefont{Scott}},
+  \bibinfo{journal}{New J. Physics} \textbf{\bibinfo{volume}{4}},
+  \bibinfo{pages}{52.1} (\bibinfo{year}{2002}).
+
+\bibitem[{\citenamefont{Scott}(2005)}]{scott2005}
+\bibinfo{author}{\bibfnamefont{B.~D.} \bibnamefont{Scott}},
+  \bibinfo{journal}{Phys. Plasmas} \textbf{\bibinfo{volume}{12}},
+  \bibinfo{pages}{062314} (\bibinfo{year}{2005}).
+
+\bibitem[{\citenamefont{Umansky et~al.}(2009)\citenamefont{Umansky, Xu, Dudson,
+  Lodestro, and Myra}}]{umansky2009}
+\bibinfo{author}{\bibfnamefont{M.~V.} \bibnamefont{Umansky}},
+  \bibinfo{author}{\bibfnamefont{X.~Q.} \bibnamefont{Xu}},
+  \bibinfo{author}{\bibfnamefont{B.}~\bibnamefont{Dudson}},
+  \bibinfo{author}{\bibfnamefont{L.}~\bibnamefont{Lodestro}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{J.}~\bibnamefont{Myra}},
+  \bibinfo{journal}{Phys. Plasmas} \textbf{\bibinfo{volume}{180}},
+  \bibinfo{pages}{887} (\bibinfo{year}{2009}).
+
+\bibitem[{\citenamefont{Friedman and Carter}(2014)}]{friedman2014}
+\bibinfo{author}{\bibfnamefont{B.}~\bibnamefont{Friedman}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{T.~A.} \bibnamefont{Carter}},
+  \bibinfo{journal}{Phys. Rev. Lett.} \textbf{\bibinfo{volume}{113}},
+  \bibinfo{pages}{025003} (\bibinfo{year}{2014}).
+
+\bibitem[{\citenamefont{Grossmann}(2000)}]{grossmann2000}
+\bibinfo{author}{\bibfnamefont{S.}~\bibnamefont{Grossmann}},
+  \bibinfo{journal}{Reviews of Modern Phys.} \textbf{\bibinfo{volume}{72}},
+  \bibinfo{pages}{603} (\bibinfo{year}{2000}).
+
+\bibitem[{\citenamefont{Waleffe}(1995)}]{waleffe1995b}
+\bibinfo{author}{\bibfnamefont{F.}~\bibnamefont{Waleffe}},
+  \bibinfo{journal}{Phys. Fluids} \textbf{\bibinfo{volume}{7}},
+  \bibinfo{pages}{3060} (\bibinfo{year}{1995}).
+
+\bibitem[{\citenamefont{Hof et~al.}(2003)\citenamefont{Hof, Juel, and
+  Mullin}}]{hof2003}
+\bibinfo{author}{\bibfnamefont{B.}~\bibnamefont{Hof}},
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Juel}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{T.}~\bibnamefont{Mullin}},
+  \bibinfo{journal}{Phys. Rev. Lett.} \textbf{\bibinfo{volume}{91}},
+  \bibinfo{pages}{244502} (\bibinfo{year}{2003}).
+
+\bibitem[{\citenamefont{Cossu}(2005)}]{cossu2005}
+\bibinfo{author}{\bibfnamefont{C.}~\bibnamefont{Cossu}},
+  \bibinfo{journal}{Comptes Rendus Mecanique} \textbf{\bibinfo{volume}{333}},
+  \bibinfo{pages}{331} (\bibinfo{year}{2005}).
+
+\end{thebibliography}
+
 
 \end{document}
