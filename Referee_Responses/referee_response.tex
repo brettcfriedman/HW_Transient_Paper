@@ -1,0 +1,212 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\setlength{\parindent}{0in}
+
+% General Latex  --------------------------------------------------
+\def\beq{\begin{equation}}
+\def\eeq{\end{equation}}
+\def\beqar{\begin{eqnarray}}
+\def\eeqar{\end{eqnarray}}
+\def\nn{\nonumber}
+\def\ol{\overline}
+\def\para{\parallel}
+
+% Operators  ------------------------------------------------------
+\newcommand{\diff}[2]{\frac{d#1}{d#2}}
+\newcommand{\diffs}[2]{\frac{d^2#1}{d#2^2}}
+\newcommand{\pdiff}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\pdiffs}[2]{\frac{\partial^2#1}{\partial#2^2}}
+\newcommand{\pdiffxy}[3]{\frac{\partial^2#1}{\partial#2 \partial#3}}
+\newcommand{\pdt}{\partial_t}
+\newcommand{\pdr}{\partial_r}
+\newcommand{\pdth}{\partial_\theta}
+\newcommand{\pdrr}{\partial^2_r}
+
+\newcommand{\enum}[2]{{#1}\times10^{#2}} % 4.2x10^{3} = \enum{4.2}{3}
+
+\newcommand{\vect}[1]{{\bf #1}}
+%\newcommand{\vect}{\overrightarrow}
+%\newcommand{\vect}{\vec}
+\def\div{\nabla\cdot}
+\def\grad{\nabla}
+\def\curl{\nabla\times}
+\newcommand{\gradpar}{\grad_\parallel}
+\newcommand{\gradperp}{\grad_\perp}
+\newcommand{\gradr}{\grad_r}
+\newcommand{\defeq}{\ensuremath{\stackrel{\text{\tiny def}}{=}}}
+
+\newcommand{\savg}[1]{\left<{#1}\right>}
+\newcommand{\vavg}[1]{\left<{#1}\right>_V}
+\newcommand{\thavg}[1]{\left<{#1}\right>_\theta}
+
+% Variable names  -------------------------------------------------
+\newcommand{\vpar} {v_\parallel}
+\newcommand{\Apar} {A_\parallel}
+\newcommand{\jpar} {j_\parallel}
+\newcommand{\kpar} {k_\parallel}
+\newcommand{\kperp} {k_\perp }
+\newcommand{\vperp} {v_\perp }
+\newcommand{\kthe}{k_\theta}
+
+\newcommand{\Evec}{\ensuremath{\boldsymbol{{\rm E}}}}
+\newcommand{\Bvec}{\ensuremath{\boldsymbol{{\rm B}}}}
+\newcommand{\Jvec}{\ensuremath{\boldsymbol{{\rm J}}}}
+\newcommand{\Fvec}{\ensuremath{\boldsymbol{{\rm F}}}}
+\newcommand{\fvec}{\ensuremath{\boldsymbol{{\rm f}}}}
+\newcommand{\vE}{\ensuremath{\boldsymbol{{\rm v}_{E}}}}
+\newcommand{\bo}{\ensuremath{\boldsymbol{{\rm b}_0}}}
+\newcommand{\bvec}{\ensuremath{\boldsymbol{{\rm b}}}}
+\newcommand{\xvec}{\ensuremath{\boldsymbol{{\rm x}}}}
+\newcommand{\yvec}{\ensuremath{\boldsymbol{{\rm y}}}}
+\newcommand{\zvec}{\ensuremath{\boldsymbol{{\rm z}}}}
+\newcommand{\vvec}{\ensuremath{\boldsymbol{{\rm v}}}}
+\newcommand{\jvec}{\ensuremath{\boldsymbol{{\rm j}}}}
+
+\newcommand{\bxgp}{\bvec\times\gradperp}
+
+\newcommand{\vve}{\ensuremath{\boldsymbol{{\rm v}}_{e}}}
+\newcommand{\vvi}{\ensuremath{\boldsymbol{{\rm v}}_{i}}}
+\newcommand{\vpe}{v_{\parallel e}}
+\newcommand{\vpi}{v_{\parallel i}}
+\newcommand{\vvE}{\ensuremath{\boldsymbol{{\rm v}}_{E}}}
+\newcommand{\vvD}{\ensuremath{\boldsymbol{{\rm v}}_{D}}}
+
+\newcommand{\nuei}{\nu_{ei}}
+\newcommand{\nuii}{\nu_{ii}}
+\newcommand{\nue}{\nu_{e}}
+\newcommand{\nuen}{\nu_{en}}
+\newcommand{\nuin}{\nu_{in}}
+\newcommand{\kpe}{\kappa_{\parallel e}}
+
+\newcommand{\rs}{\rho_{s}}
+\newcommand{\ri}{\rho_{i}}
+\newcommand{\wci}{\Omega_{i}}
+\newcommand{\wcix}{\Omega_{ix}}
+\newcommand{\wce}{\Omega_{e}}
+\newcommand{\tomega}{\tilde\omega}
+\newcommand{\Isat}{I_{\rm sat}}
+\newcommand{\fmie}{\frac{m_i}{m_e}}
+\newcommand{\fmei}{\frac{m_e}{m_i}}
+
+
+% Often used dimensions
+\newcommand{\cm}{\rm cm}
+\newcommand{\mm}{\rm mm}
+\newcommand{\cmn}{{\rm cm}^{-3}}
+\newcommand{\mn}{{\rm m}^{-3}}
+\newcommand{\eV}{\rm eV}
+\newcommand{\G}{\rm G}
+\newcommand{\T}{\rm T}
+
+
+
+\begin{document}
+
+
+{\bf Response to Referees \\
+ \\} 
+Brett Friedman and Troy Carter
+%Updated: \today \\
+
+\hrulefill
+
+We would like to thank the referee for his/her thorough reading of our paper and clear and insightful comments. We have responded to each comment below and made requisite changes to the text.
+Most of the changes are relatively minor and involve corrections pointed out by the referee, changes in wording, and further clarification on certain points.
+
+The referee's comment 14 is a rather significant one, suggesting the possible removal of Section V of the paper. 
+We agree with the points but don't want to go so far as to remove the entire section because even though the result is weak (unsuccessful), 
+we believe that it is still valuable and provides some important insight. What we have done, then, is move it to an appendix. 
+We have also title, abstract, and introduction to de-emphasize that part of the paper. \\ \\
+
+
+\emph{1) page 2, second column: $N_k$ is termed 'the nonlinear matrix'. Since matrices are generally associated to linear operator, it would be more appropriate to call it nonlinear operator. } \\
+
+This is a good point. We have made this change. \\
+
+\emph{2) page 3, Eq. 13. This is defined as an energy. However, it is a normalized (adimensional) quantity, and as such it looks more like an energy amplification factor.}\\
+
+This is correct. We did not do a good job with our explanation. Really, we always set the initial amplitude to 1 so that the energy and the energy amplification are synonymous.
+We have added this explanation in the text and changed Eq. 13. \\
+
+
+\emph{3) page 3, 2nd column. The argument about non-normality of an operator implicitly assumes the choice of a norm (in this case $L_2$ norm, I presume). One can always choose a norm that makes a non-normal matrix normal, so the particular choice (and the physical reason behind it) should be spelled out. }\\
+
+We did try to spell out what norm we were using around Eqs. 6-8, but I guess we didn't make it clear enough. So we have changed and added some text to try to make it clearer. We are using the $L_2$ norm. However, we have redefined our state vector (and the linear and nonlinear operators for consistency) so that the $L_2$ norm of the state vector gives the energy. This is a common thing that is done in many of our references.\\
+
+\emph{4) page 4: the derivation of Eq. 17 is confusing. It is probably just a wrong equation reference ("we multiply eq. 15 and 16..."). I guess the procedure is simply to substitute eqs. 15 and 16 in 1 and 2, use the basis orthogonality and sum the two equations together. }\\
+
+Yes, we did just reference the wrong equations. Sorry.\\
+
+\emph{5) From section 3 on, several growth rate 'gamma' are introduced (with different subscripts). I suggest to list all of them in a table, with an explanation of their meaning. Otherwise it is too easy to get lost. }\\
+
+Good idea. We've added a table now.\\
+
+\emph{6) I am a bit confused by the use of eq. 18. The authors say that this is the way the energy evolution equation can be 'symbolically' (I suggest "formally") written. However, by inspection of eq. 17, one can explicitly write down an equation for the linear term $dE_l/dt$. Is not only the third term on the RHS of eq. 17 linear in the energy? In other words, it seems to me that the first and second terms on RHS cannot be written as linear combinations of the energy. This automatically gives the linear rate of energy injection $\gamma_{l,k}$. }\\
+
+We attempt to make some clarifications in the text, namely by explicitly writing the equations for $dE_l/dt$ and $dE_{nl}/dt$. We do not mean that certain terms on the RHS
+can be written as linear combinations of the energy. We mean that the first three terms come from the linear terms of the original HW equations. 
+They can be used to evaluate the turbulent growth rate, which is somewhat analogous to the eigenmode growth rate. For instance, if $n_k, \phi_k$ are taken from one of the linear
+eigenmodes and inserted into the first three terms of Eq. 17, and then one divides by (twice) the energy (Eq. 6) using the same $n_k, \phi_k$, one recovers the growth rate of that eigenmode.\\
+
+\emph{7) page 4, last paragraph. "$\gamma_{t,k}<\gamma_{s,k}$". Here the authors are using $\gamma_t$ in lieu of $\gamma_l$, as explained in the previous paragraphs. However, this is legitimate only in quasi-steady state. Otherwise, $\gamma_t$ is a nonlinear quantity that changes in time, and can be larger than $\gamma_s$ even for systems with normal linear operators. }\\
+
+We clarify in the text that $\gamma_t$ is defined in quasi-steady state. It is time-independent, as are all of the growth rates we define.\\
+
+\emph{8) On page 5 the authors compare plots of $\gamma_s$ and $\gamma_t$, but they have not yet explained how these are calculated. I suggest to postpone any discussion about growth rate behavior, after explaining how they are calculated. }\\
+
+The calculations of these growth rates are explained before the plots, and now they are hopefully explained better.\\
+
+\emph{9) Page 5, first column: "moderate normality" should be "moderate non-normality" (i.e. normality is only for the Henrici measure equal to 0, while non-normality can be moderate, heavy, etc.) }\\
+
+Good catch.\\
+
+\emph{10) I have found quite confusing the explanation of how the turbulent growth rate $\gamma_t$ is calculated. On page 6, first column, it says: "may be approximated without large numerical simulations", which suggests that one needs to run small simulations. It turns out that, on the contrary, it can be evaluated analytically. However, there is a refrain in the paper referring to the complex ratio $n_k/\phi_k$. But I don't see where and why this needs to be calculated. }\\
+
+We hope the edits have made this clear in the paper. $\gamma_t$ is calculated from the nonlinear simulation. Its calculation requires $n_k$ and $\phi_k$ as functions of time, although only the ratio $n_k/\phi_k$ is actually necessary. Our analytic method gives us a non-modal growth rate, which is an \emph{approximation} (good or bad) of the turbulent growth rate. So there is no need for small simulations, although we see how that was implied and we have thus removed the word ``large.''\\
+
+\emph{11) Eq. 21 misses a factor 1/2 }\\
+
+We had meant to define $u_k = 1/ \sqrt{2} (n_k, k \phi_k)^T$ so that the factor of $1/2$ wasn't necessary, but we missed the $\sqrt{2}$ factor in an earlier expression, so that was the incorrect one.\\
+
+\emph{12) On Eq. 22. There is an unspelled assumption here on the distribution of the ensemble. Are all states equally distributed? Is such distribution physical meaningful? Also, I would emphasize the fact that by averaging over an ensemble of states, the information about the initial condition is lost (or averaged out). This is a crucial point because one of the main weaknesses of non-modal analysis with respect to the standard normal mode analysis, is the need to specify a given initial condition. }\\
+
+Yes all states are equally distributed initially. Remember that each state at a particular $k$ is completely classified by the ratio $n_k/\phi_k$ as far as the growth rate is concerned.
+So each member of the ensemble is initially one possible value of this complex ratio. But once the initial states have evolved under the linear operator for some time, not all of
+the possible values of the ratio are populated. In fact, after a long enough time, this ratio is nearly equal to that for the faster growing eigenmode for all members of the ensemble.
+The time average, then, produces something meaningful -- that is, an average over many ratios between a random ratio and the eigenmode ratio. 
+
+In physical terms, the system starts out random, then evolves toward the faster growing linear eigenmode structure until it reaches a nonlinear decorrelation time, at which point it becomes
+random again. Remember, though, that we use an ensemble of initially random states in place of a long time series that involves randomization followed by linear evolution followed by
+randomization, etc.
+
+And yes, all information about the initial condition is lost, which is exactly our intention. Having to specify an initial condition is the main weakness of traditional non-modal analysis.
+Our analysis uses ideas from non-modal analysis but attempts to average out the initial condition, making it more analogous to normal-mode analysis. So maybe when we say non-modal analysis,
+we give the wrong impression, but we have no better term.\\
+
+\emph{13) About Figure 6 and 7: these represent probably the most crucial figures of the paper. Yet, there is still no explanation on how $\gamma_t$ is evaluated from the full nonlinear simulations. }\\
+
+Again, we've clarified it in the paper now.\\
+
+\emph{14) I am very perplexed about the whole section V, to the extent that I would probably take it out. I appreciate the effort of using the discussed non-modal growth rate as indicator of subcritical turbulence onset. But the results of this section are very weak. First, the author have to introduce a yet different model from the ones previously described, in order to get something that can actually sustain subcritical turbulence. And more importantly, figure 11 suggest that their method does not work! So I don't understand why one would like to read this section. }\\
+
+We agree that the section overall is weak due to the lack of success of the method in the subcritical regime, and the section isn't essential for the rest of the paper. But the issue
+of predicting the subcritical onset is such an important one that it merits discussion. And although our particular method does not work, it seems plausible that some of the ideas
+we use may be helpful in crafting a better method. And from doing the subcritical work, we have learned where the method breaks down. This information shouldn't be abandoned.
+So we think turning Section V into an appendix may be the best solution to keep it from muddying the rest of the paper.\\
+
+\emph{15) In figure 10a) I think it is more interesting to show the ratio of fluctuation over total energy, otherwise the numbers do not convey any information. }\\
+
+Well the numbers are not that important, but this energy seems to be the natural normalized one: $|n|^2 + |\gradperp \phi|^2$. So we're not sure what you mean. \\
+
+\emph{16) Finally, this manuscript contain too many typos!! Please run a spell-check before submitting (and, possibly, enumerate lines). }\\
+
+We've now run spell-check and tried to catch any typos.
+
+
+\bibliographystyle{unsrt}
+\bibliography{refs}
+
+%
+%
+
+\end{document}

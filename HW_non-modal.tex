@@ -105,7 +105,7 @@
 
 \begin{document}
 
-\title{A Procedure to Predict the Subcritical Turbulent Onset Criterion Applied to a Modified Hasegawa-Wakatani Model}
+\title{Non-Modal Predictions of Turbulent Properties Applied to the Hasegawa-Wakatani Model}
 
 \author{B. Friedman}
 \email{friedman11@llnl.gov}
@@ -161,7 +161,7 @@ Non-modal analysis generally employs tools such as pseudospectra and maximum gro
 why turbulence is subcritical in various instances~\cite{trefethen1993,camargo1998}. 
 However, they have not been used to predict onset criteria in subcritical systems (e.g. the transition Reynold's number in pipe flows).
 This paper outlines and illustrates a non-modal method to make quantitative predictions of turbulent properties including turbulent onset criteria. 
-Our approach is to define a non-modal growth rate that is analagous to an eigenmode growth rate, but which takes into account transient growth effects. 
+Our approach is to define a non-modal growth rate that is analogous to an eigenmode growth rate, but which takes into account transient growth effects. 
 
 To accomplish this, we model the effect that the nonlinearities have on the complex ratio of the state variables. Our model is one in which the 
 nonlinearities randomize the complex ratios on a characteristic nonlinear time scale.
@@ -200,7 +200,7 @@ points opposite the density gradient is defined as the $x$ direction, and the $y
 
 In the analysis and numerical simulations, which we perform with the BOUT++ code~\cite{dudson2009}, we use periodic boundary conditions in
 the $y$ and $z$ directions with zero-value boundaries in the $x$ direction. We use a domain size of $64 \rho_s \times 64 \rho_s \times 320 \rho_s$.
-For the 2D version of the model, we replace $-\xi \gradpar^2$ with a single parameter $\alpha$ (definied as $\alpha = 4 \pi k_z^2 \rho_s^2 \omega_{ce} /\nu_{ei})$, 
+For the 2D version of the model, we replace $-\xi \gradpar^2$ with a single parameter $\alpha$ (defined as $\alpha = 4 \pi k_z^2 \rho_s^2 \omega_{ce} /\nu_{ei})$, 
 which is commonly known as the adiabaticity parameter~\cite{camargo1995,camargo1998}. Additionally we use a domain size of $50 \rho_s \times 50 \rho_s$.
 In numerical simulations, the turbulence can be suppressed due to the build-up of $k_y=0$ density and potential structures~\cite{biskamp1995}. To prevent this, we subtract out the $k_y=0$
 density and potential components, which is the equivalent of adding source terms to Eqs.~\ref{n_eq} and~\ref{phi_eq}~\cite{friedman2012b}.
@@ -224,9 +224,9 @@ The result for the 3D model is an equation for each mode $k = (k_x,k_y,k_z)$:
 \label{A_k}
 \mathbf{A}_k = \left( \begin{array}{cc} -\xi k_z^2 - D k_\perp^4 & -i \kappa k_y + \xi k_z^2 \\  \xi \frac{k_z^2}{k_\perp^2} & - \xi \frac{k_z^2}{k_\perp^2} - D k_\perp^4\end{array} \right)
 \eeqar
-with $\mathbf{A}_k$ being the linear coupling matrix and $\mathbf{N}_k$ the nonlinear matrix, which we don't write explicitly. 
-Now in assessing the degree of normality of the HW model, we are not interested in the normality of $\mathbf{A}_k$ itself. 
-Rather, we are interested in the energetically-weighted version of this matrix~\cite{camargo1998,schmid2007,camporeale2010}. Since the energy in a given Fourier mode is
+with $\mathbf{A}_k$ being the linear coupling matrix and $\mathbf{N}_k$ the nonlinear operator, which we don't write explicitly.
+Now in assessing the degree of normality of the HW model, we must make a choice of norms because one can always choose a norm that makes a particular matrix normal. However, it is much more revealing to choose
+a physically motivated norm, especially the energy-norm, than one that simply makes a given matrix normal~\cite{camargo1998,schmid2007,camporeale2010}. Since the energy in a given Fourier mode is
 
 \beq
 \label{en_def}
@@ -240,8 +240,11 @@ we rewrite Eq.~\ref{fourier_eqn} as
 \label{B_k}
 \mathbf{B}_k = \left( \begin{array}{cc} -\xi k_z^2 - D k_\perp^4 & -i \kappa \frac{k_y}{k_\perp} + \xi \frac{k_z^2}{k_\perp} \\  \xi \frac{k_z^2}{k_\perp} & - \xi \frac{k_z^2}{k_\perp^2} - D k_\perp^4\end{array} \right)
 \eeqar
-Since the square $L_2$-norm of the new state vector $\frac{1}{\sqrt{2}} \left( \begin{array}{cc} n_k \\ k_\perp \phi_k \end{array} \right)$ gives the energy contained in the mode $k$,
-$\mathbf{B}_k$ is the energetically-weighted matrix of interest. In the adiabatic limit (as long as $k_\perp$ remains finite):
+The square $L_2$-norm of the state vector $\frac{1}{\sqrt{2}} \left( n_k , k_\perp \phi_k \right)^T$ gives the energy contained in the mode $k$.
+Therefore, we choose to cast the problem in terms of Eq.~\ref{fourier_en_eqn} rather than Eq.~\ref{fourier_eqn} and focus on the linear matrix $\mathbf{B}_k$ rather than $\mathbf{A}_k$. Thus, we can use
+the well-known $L_2$-norm rather than a problem-dependent energy norm but still recover the same results as if we used an energy-norm with the formulation of Eq.~\ref{fourier_eqn}.
+
+In the adiabatic limit (as long as $k_\perp$ remains finite):
 
 \beq
 \label{B_norm_limit}
@@ -268,13 +271,14 @@ system. The linear HW system is
 \label{lin_HW}
 \diff{u_k}{t} = \mathbf{B}_k u_k
 \eeq
-where $u_k = \left( n_k, k_\perp \phi_k \right)^T$.
+where $u_k = \frac{1}{\sqrt{2}} \left( n_k, k_\perp \phi_k \right)^T$.
 The solution to this is $u_k(t) = e^{\mathbf{B}_k t} u_k(0)$ where the exponential of the matrix is defined in terms of
-its Taylor expansion. The solution is dependent on the initial condition $u_k(0)$. The energy as a function of time is
+its Taylor expansion. The solution is dependent on the initial condition $u_k(0)$.
+The energy, which is synonymous with the energy amplification factor since we set $||u_k(0)||^2 =1$ evolves as
 
 \beq
 \label{Et}
-E_k(t) = \frac{||u_k(t)||^2}{||u_k(0)||^2} = \frac{||e^{\mathbf{B}_k t} u_k(0)||^2}{||u_k(0)||^2}
+E_k(t) = ||u_k(t)||^2 = ||e^{\mathbf{B}_k t} u_k(0)||^2
 \eeq
 Different initial conditions provide optimal energy growth at different times, but the upper envelope of all such energy evolution curves is given by
 $E_{k,\rm{max}}(t) = ||e^{\mathbf{B}_k t}||^2$, which does not depend on an initial condition.
@@ -287,7 +291,7 @@ with the adiabaticity parameter $\alpha$.
 
 \begin{figure}
 \centerline{\includegraphics[width=0.45\textwidth]{max_en_growth}}
-\caption{$G_{k,\alpha,\rm{max}}(t) = ||e^{\mathbf{B}_{k,\alpha} t}||^2$ for $k_x=0, k_y=1, \kappa=1$ for different values of the 2D adiabaticity parameter 
+\caption{$E_{k,\alpha,\rm{max}}(t) = ||e^{\mathbf{B}_{k,\alpha} t}||^2$ for $k_x=0, k_y=1, \kappa=1$ for different values of the 2D adiabaticity parameter 
 $\alpha$ compared to the energy growth $e^{2 \gamma_{s,\alpha,k} t}$ of the least stable eigenmode of  $\mathbf{B}_{k,\alpha}$. Also indicated for each matrix is its scalar normality measure $1-H$.
 The time axis is normalized to $\gamma_{s,\alpha}$, which is different for each of the curves. This normalization makes the $e^{2 \gamma_{s,\alpha,k} t}$ line the same for all $\alpha$. 
 $||e^{\mathbf{B}_{k,\alpha} t}||^2$ displays large non-exponential growth at early times that increases with decreasing $\alpha$.}
@@ -326,7 +330,7 @@ n = \sum_{k} n_k \ {\rm sin} \left( k_x x \right) e^{i k_y y + i k_z z} \\
 \phi = \sum_{k} \phi_k \ {\rm sin} \left( k_x x \right) e^{i k_y y + i k_z z},
 \eeqar
 where, again, $k$ stands for $(k_x,k_y,k_z)$.
-Then, we multiply Eq.~\ref{subs_fourier_n} by $n^*_{k'} \ {\rm sin} \left( k'_x x \right) e^{-i k'_y y - i k'_z z}$ and Eq.~\ref{subs_fourier_phi} by 
+Then, we multiply Eq.~\ref{n_eq} by $n^*_{k'} \ {\rm sin} \left( k'_x x \right) e^{-i k'_y y - i k'_z z}$ and Eq.~\ref{phi_eq} by 
 $-\phi^*_{k'} \ {\rm sin} \left( k'_x x \right) e^{-i k'_y y - i k'_z z}$, take the volume integral and add the two equations together. The result is
 
 \beqar
@@ -336,14 +340,19 @@ $-\phi^*_{k'} \ {\rm sin} \left( k'_x x \right) e^{-i k'_y y - i k'_z z}$, take 
 \eeqar
 Recall that the energy $E_k$ is $\frac{1}{2} \left( |n_k|^2 + k^2_\perp |\phi_k|^2 \right)$, so the left hand side is the time derivative of the energy.
 The term $\sum_{k'} T(k,k')$ represents the nonlinear contribution (three-wave transfers between different $k$'s), 
-which we do not write explicitly. This energy evolution equation may be written symbolically as
+which we do not write explicitly. This energy evolution equation may be written formally as
 
-\beq
+\beqar
 \label{dEdt_def}
-\diff{E_k}{t} = \diff{E_{l,k}}{t} + \diff{E_{nl,k}}{t}
-\eeq
-where $\diff{E_{l,k}}{t}$ represents the the linear terms on the RHS of Eq.~\ref{Explicit_En_eqn}, which are quadratic in the fluctuating quantities $n_k$ and $\phi_k$.
-$\diff{E_{l,k}}{t}$ describes the injection of energy into the fluctuations from the free energy in the equilibrium gradients plus the dissipation from collisions and hyperdiffusion/viscosity.
+\diff{E_k}{t} = \diff{E_{l,k}}{t} + \diff{E_{nl,k}}{t}, \quad {\rm where}\\
+\label{dEl_dt_def}
+\diff{E_{l,k}}{t} = -i k_y \kappa \phi_k n^*_k - \xi k_z^2 |n_k - \phi_k|^2 \nonumber \\
+- D k^4_\perp \left( |n_k|^2 + k^2_\perp |\phi_k|^2 \right) \\
+\label{dEnl_dt_def}
+ \diff{E_{nl,k}}{t} = \sum_{k'} T(k,k')
+\eeqar
+$\diff{E_{l,k}}{t}$ is composed of the linear terms on the RHS of Eq.~\ref{Explicit_En_eqn}, which are quadratic in the fluctuating quantities $n_k$ and $\phi_k$.
+It describes the injection of energy into the fluctuations from the free energy in the equilibrium gradients plus the dissipation from collisions and hyperdiffusion/viscosity.
 $\diff{E_{nl,k}}{t}$ represents $\sum_{k'} T(k,k')$ in  Eq.~\ref{Explicit_En_eqn} and comes from the nonlinear terms in Eqs.~\ref{n_eq} and~\ref{phi_eq}. 
 The terms in $T(k,k')$ are triadic in the fluctuating quantities and account for the energy exchange between fluctuations with different $k$'s. 
 They are also conservative when summed over all wavenumbers: $\sum_{k} \diff{E_{nl,k}}{t} = \sum_{k,k'} T(k,k') = 0$~\cite{camargo1995}.
@@ -353,21 +362,34 @@ the rate of energy removal (or deposition) from the nonlinear terms. Formally,
 
 \beqar
 \label{steady_state}
-\gamma_k = \gamma_{l,k} + \gamma_{nl,k} = 0, \\
-\gamma_k \equiv  \displaystyle\lim_{T \to \infty} \frac{1}{T} \int_0^T \frac{dE_k/dt}{2 E_k} dt \nonumber \\
-= \displaystyle\lim_{T \to \infty} \frac{{\rm{Log}}\left[ E_k(T)/E_k(0) \right]}{2 T} = 0.
+\gamma_{l,k} + \gamma_{nl,k} = \displaystyle\lim_{T \to \infty} \frac{1}{T} \int_0^T \frac{dE_k/dt}{2 E_k} dt = 0, \\
+\label{gamma_l_def}
+{\rm where}, \ \gamma_{l,k} \equiv \displaystyle\lim_{T \to \infty} \frac{1}{T} \int_0^T \frac{dE_{l,k}/dt}{2 E_k} dt \\
+\label{gamma_nl_def}
+ \gamma_{nl,k} \equiv \displaystyle\lim_{T \to \infty} \frac{1}{T} \int_0^T \frac{dE_{nl,k}/dt}{2 E_k} dt 
 \eeqar
-$\gamma_k$ vanishes, as indicated, for steady or quasi-steady state turbulence, meaning $\gamma_{l,k} = - \gamma_{nl,k}$.
+Thus, assuming steady or quasi-steady state turbulence $\gamma_{l,k} = - \gamma_{nl,k}$. Note that these, and all other growth rates, are defined to be time-independent (time-averaged) quantities.
+At the scales of energy injection, $\gamma_{l,k}$ is positive and can be considered the turbulence analog of the linear eigenmode growth rate $\gamma_{s,k}$~\cite{friedman2012b,terry2006b}. 
+In fact, $\gamma_{l,k} = \gamma_{s,k}$ if $n_k/\phi_k$ calculated from the nonlinear simulation is constant in time and equal to $n_k/\phi_k$ calculated from the fastest growing eigenmode at $k$. 
+In general, though, these ratios are not the same because the turbulence at $k$ is composed of some linear combination of the \emph{two} eigenmodes.
 
-It is the linear rate of energy injection into the fluctuations
-$\gamma_{l,k}$ that we wish to use as the turbulent growth rate
-$\gamma_{t,k}$ because $\gamma_{l,k}$ determines how fast and where in wavenumber space energy is injected into the turbulence.
-$\gamma_{l,k}$, in other words, is the turbulence equivalent to the linear eigenmode growth rate $\gamma_{s,k}$~\cite{friedman2012b,terry2006b}. 
-That is, in a linear simulation run for a sufficiently long time where transients die away, the calculation of $\gamma_{l,k}$ from the simulated $n_k$ and $\phi_k$ gives exactly $\gamma_{s,k}$, which is generally
-calculated from the eigenvalue problem rather than a direct simulation.
-However, we always calculate $\gamma_{t,k}$ from steady state turbulent $n_k$ and $\phi_k$ fluctuations.
+\begin{table}
+\begin{tabular}{|c|p {0.102\textwidth}|p {0.26\textwidth}|}
+\hline
+Symbol & Description & \qquad \qquad \quad Formula \\ \hline
+$\gamma_s$ & Eigenmode growth rate & \qquad max(Re\{ eig( $\mathbf{B}_k$ )\})\\ \hline
+$\gamma_l = \gamma_t$ & Turbulent growth rate & \quad $\displaystyle\lim_{T \to \infty} \frac{1}{T} \int_0^T \frac{dE_{l,k}/dt}{2 E_k} dt $\\ \hline
+$\gamma_{nl}$ & Nonlinear growth rate & \quad $\displaystyle\lim_{T \to \infty} \frac{1}{T} \int_0^T \frac{dE_{nl,k}/dt}{2 E_k} dt = - \gamma_{l}$\\ \hline
+$\gamma_{{\rm nm}}$ & Non-modal growth rate & \ $\frac{1}{4 \tau_{nl,k}} \ {\rm{Log}} \left[ {\rm{tr}} \{ e^{\mathbf{B}_k \tau_{nl,k}} e^{\mathbf{B}^{\dagger} \tau_{nl,k}} \} \right] $ \\ \hline
+$\gamma_{\omega}$ & $\omega$ non-modal growth rate & \ $\frac{\omega_{s,k}}{4} \ {\rm{Log}} \left[ {\rm{tr}} \{ e^{\mathbf{B}_k \omega_{s,k}^{-1}} e^{\mathbf{B}^{\dagger} \omega_{s,k}^{-1}} \} \right]$\\ \hline
+$\gamma_{\gamma}$ & $\gamma$ non-modal growth rate & \ $\frac{\gamma_{s,k}}{4} \ {\rm{Log}} \left[ {\rm{tr}} \{ e^{\mathbf{B}_k \gamma_{s,k}^{-1}} e^{\mathbf{B}^{\dagger} \gamma_{s,k}^{-1}} \} \right]$\\ \hline
+\end{tabular}
+\caption{Growth rate symbol descriptions and formulas}
+\label{gamma_table}
+\end{table}
 
-The turbulent growth rate $\gamma_{t,k}$ is a useful and informative quantity. 
+In order to clarify that $\gamma_{l,k}$ is calculated from the quasi-steady-state portion of the nonlinear simulation, we define $\gamma_{t,k} \equiv \gamma_{l,k}$, and we call $\gamma_{t,k}$ the turbulent growth rate.
+$\gamma_{t,k}$ is a useful and informative quantity. 
 Note that in Eq.~\ref{Explicit_En_eqn} all of the linear terms on the right hand side of the equation are negative, except for the first term, which can have either sign. 
 This term is proportional to the cross-field particle flux $\Gamma_x = \left< v_{E,x} n \right> \sim -i k_y \phi_k n_k$, meaning that a positive $\gamma_{t,k}$ indicates an outward particle flux
 due to $k$ wavenumber flows. Particle transport, then, requires that $\gamma_{t,k} > 0$ for at least one value of $k$. Furthermore, since the nonlinearities are energetically conservative,
@@ -399,8 +421,8 @@ As expected, when $\alpha$ is small ($\lesssim 10^{-3}$), $\gamma_{t} > \gamma_{
 $\gamma_{t} \gg \gamma_{s}$ as $\alpha \to 0$. Additionally, when $\alpha$ becomes larger and the system becomes more normal ($\gtrsim 10^{-1}$), $\gamma_{t} < \gamma_{s}$.
 For both the normal and highly non-normal limits of the 2D HW model, $\gamma_{s}$ does a poor job of predicting $\gamma_{t}$ because $\gamma_{s}$ neglects the stable branch of the
 dispersion relation -- the damped eigenmode~\cite{makwana2011}. 
-Additionally, in the moderate normality region where $\gamma_{s}$ does match $\gamma_{t}$ well, it is misleading to think of the system as being composed of only the
-unstable eigenmode. The damped mode simply has both damping and transient growth effects depending on its relative magnitude at a particular time. These effects nearly cancel out on average when $\gamma_{t} \approx \gamma_{s}$.
+Additionally, in the moderate non-normality region where $\gamma_{s}$ does match $\gamma_{t}$ well, it is misleading to think of the system as being composed of only the unstable eigenmode. 
+The damped mode simply has both damping and transient growth effects depending on its relative magnitude at a particular time. These effects nearly cancel out on average when $\gamma_{t} \approx \gamma_{s}$.
 
 \begin{figure}
 \centerline{\includegraphics[width=0.52\textwidth]{alpha1_gamma_s_t}}
@@ -448,9 +470,9 @@ In this section, we outline a procedure that uses quick and simple methods to ap
 from only linear terms in the original model equations (Eqs.~\ref{n_eq} and~\ref{phi_eq}). The exact form of the nonlinearities do not enter the calculation of $\gamma_{t,k}$. Rather, the nonlinearities
 simply influence the quantities $n_k$ and $\phi_k$ that are used to calculate $\gamma_{t,k}$. Furthermore, $\gamma_{t,k}$ is a statistical (time-averaged) quantity, and therefore, it is not
 necessary to know its instantaneous value, or likewise, the instantaneous values of $n_k$ and $\phi_k$. In fact, the only quantity that affects $\gamma_{t,k}$ is the average complex ratio $n_k/\phi_k$.
-Thus, it is feasible that $\gamma_{t,k}$ may be approximated without large numerical simulations.
+Thus, it is feasible that $\gamma_{t,k}$ may be approximated without numerical simulation.
 
-Our method of approximation involves modelling the nonlinearities as instantaneous randomizing forces that act periodically.
+Our method of approximation involves modeling the nonlinearities as instantaneous randomizing forces that act periodically.
 In this regard, note that the advective nonlinearity terms in Eqs.~\ref{n_eq} and~\ref{phi_eq} have a certain time scale associated with them: $\tau_{nl}^{-1} \sim v_E k_\perp$.
 This nonlinear time scale is generally associated with the eddy turnover or decorrelation time. Our heuristic model of the nonlinearities is then one
 in which they randomize the complex ratio $n_k/\phi_k$ once every $\tau_{nl}$.
@@ -533,7 +555,7 @@ in which the system is fairly non-normal, $\gamma_{\omega,k} \rm{and} \ \gamma_{
 This limit, of course, is important in subcritical systems, making the non-modal growth rates quite useful.
 As the system becomes more normal, $\gamma_{t,k}$ diverges from $\gamma_{\omega,k} \rm{and} \ \gamma_{\gamma,k}$, with $\gamma_{\gamma,k}$ doing a better job than $\gamma_{\omega,k}$.
 
-Next, we do the same comparison for the 3D HW model as we did for the 2D HW model. However, there is one additional subtelty when considering the 3D model. In the 3D model, for $k_z=0$, the least stable linear
+Next, we do the same comparison for the 3D HW model as we did for the 2D HW model. However, there is one additional subtlety when considering the 3D model. In the 3D model, for $k_z=0$, the least stable linear
 eigenmode is approximately zero ($\omega_{s,k_z=0} = 0, \gamma_{s,k_z=0} \approx 0$), so $\gamma_{\omega,k_z=0}$ is not well defined (see Eq.~\ref{gamma_omega_def}), and $|\gamma_{s,k_z=0}^{-1}|$ is much too large to
 represent a meaningful time scale. 
 Thus, we use $\omega_{s,k_z=0.02}$ -- where $k_z=0.02$ is the lowest finite value of $k_z$ available to our system -- in place of
@@ -597,13 +619,13 @@ instability for $R_g < R < R_c$.}
 \label{subcritical_diagram}
 \end{figure}
 
-We show that the modifed 3D HW system is subcritical in Fig.~\ref{crit_amp_dependence}. In Fig.~\ref{crit_amp_dependence} a), we plot the energy versus time for fluctuations that are initialized with the same functional form, but with
+We show that the modified 3D HW system is subcritical in Fig.~\ref{crit_amp_dependence}. In Fig.~\ref{crit_amp_dependence} a), we plot the energy versus time for fluctuations that are initialized with the same functional form, but with
 different amplitudes.
 The fluctuations initialized with high enough amplitude lead to turbulence. 
 Otherwise, the fluctuations grow transiently, but do not reach high enough amplitude for the nonlinearities to bootstrap the process, so they decay away. 
 This finite amplitude turbulence threshold, as described above, is a key indicator of subcritical turbulence.
 
-In Fig.~\ref{crit_amp_dependence} b), we show the amplitude threashold curve -- like that of Fig.~\ref{subcritical_diagram}. Each point represents the minimum amplitude that is needed for the simulation to eventually become
+In Fig.~\ref{crit_amp_dependence} b), we show the amplitude threshold curve -- like that of Fig.~\ref{subcritical_diagram}. Each point represents the minimum amplitude that is needed for the simulation to eventually become
 turbulent. We fit the points to a function of the form $A = a (\kappa - \kappa_g)^{- \lambda}$, 
 where $A$ is the lowest initial energy amplitude that leads to turbulence for each value of $\kappa$. The least-squares fitting provides optimal values for the parameters $a, \kappa_g, \rm{and} \ \lambda$. 
 As in the case of shear flows, $\lambda \sim 1$. Note that this power law exponent shouldn't be taken too seriously because we have not used ``optimal'' initial perturbations to get the points~\cite{cossu2005}. 
@@ -612,9 +634,9 @@ In any case, this is not our main concern; we are simply demonstrating that this
 \begin{figure}
 \centerline{\includegraphics[width=0.52\textwidth]{crit_amp_dependence}}
 \caption{{\bf a)} Total energy evolution of fluctuations of the modified 3D HW model with $\xi=10$ and $\kappa=1$ where the initial perturbations are set to different amplitudes. 
-All initial perturbations are initialized randomly in the $y$ and $z$ directions and with a Guassian in the $x$ direction. 
-There is a critical initial amplitude threashold above which turbulence develops and maintains itself and below which turbuelence never develops and the fluctuations decay away. 
-{\bf b)} The amplitude threashold as a function of $\kappa$ for $\xi=10$. The points are obtained from nonlinear simulations like those in part a) with each point indicating the minimum amplitude needed for the simulation
+All initial perturbations are initialized randomly in the $y$ and $z$ directions and with a Gaussian in the $x$ direction. 
+There is a critical initial amplitude threshold above which turbulence develops and maintains itself and below which turbulence never develops and the fluctuations decay away. 
+{\bf b)} The amplitude threshold as a function of $\kappa$ for $\xi=10$. The points are obtained from nonlinear simulations like those in part a) with each point indicating the minimum amplitude needed for the simulation
 to become turbulent. The line is a fit to the points with the functional form $a (\kappa-\kappa_g)^{- \lambda}$.
 We set the diffusion and viscosity coefficient $D$ to $0.5$ in these figures so that the decay occurs on a short enough time scale to be able to see the results.}
 \label{crit_amp_dependence}
@@ -650,7 +672,7 @@ When the nonlinear terms in the model equations are energetically conservative, 
 This is manifest in the positivity of the maximum turbulent growth rate, which is defined in terms of only the linear terms in the energetic model equations. Thus, an estimation of the turbulent growth rate provides vital
 information into the nature of the system. Furthermore, such an estimate almost surely requires non-modal techniques when the system is non-normal. 
 
-Our method for analytically esimating this growth rate involves using a type of closure, which means modelling the effect that the nonlinearities have
+Our method for analytically estimating this growth rate involves using a type of closure, which means modeling the effect that the nonlinearities have
 on the time-averaged complex ratio of the Fourier-decomposed state variables. 
 We present one specific phenomenological closure, in which the nonlinearities instantaneously randomize the state variables once every eddy turnover time, between
 which, the linear terms deterministically evolve them. We then estimate the eddy turnover time as the inverse linear eigenmode frequency or growth rate.
